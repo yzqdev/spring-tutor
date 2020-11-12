@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
+
 /**
  * 城市 Controller 实现 Restful HTTP 服务
  * <p>
@@ -16,7 +18,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping(value = "/city")
 public class CityRestController {
 
-    @Autowired
+    @Resource
     private CityService cityService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -27,9 +29,7 @@ public class CityRestController {
     @RequestMapping(method = RequestMethod.GET)
     public Flux<City> findAllCity() {
         return Flux.create(cityFluxSink -> {
-            cityService.findAllCity().forEach(city -> {
-                cityFluxSink.next(city);
-            });
+            cityService.findAllCity().forEach(cityFluxSink::next);
             cityFluxSink.complete();
         });
     }
