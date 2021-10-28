@@ -6,11 +6,10 @@ import com.example.aop.constant.GlobalConst;
 import com.example.aop.core.CommonResp;
 import com.example.aop.core.Passport;
 import com.example.aop.service.DemoService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 
 
 /**
@@ -22,7 +21,7 @@ public class HomeController {
     @Resource
     private DemoService demoService;
 
-    @RequestMapping("/test")
+    @GetMapping("/test")
     public CommonResp test(@RequestParam("name") String name) {
         Passport passport = new Passport();
         passport.setUserId(GlobalConst.DEFAULT_USER_ID);
@@ -31,7 +30,7 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/test1")
+    @GetMapping("/test1")
     public CommonResp test1() {
         Passport passport = new Passport();
         passport.setUserId(101);
@@ -40,11 +39,25 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/test3")
+    @GetMapping("/test3")
     public CommonResp test3() {
         Passport passport = new Passport();
         passport.setUserId(222);
         passport.setToken(String.valueOf(33));
         return CommonResp.success("hhh");
+    }
+
+    @GetMapping("/get")
+    public HashMap<String,Object> getThings(@RequestParam("name") String name) {
+        HashMap<String,Object> res=new HashMap<>(2);
+        res.put("name",name);
+        res.put("key","key");
+        return   res;
+    }
+    @PostMapping("/post/{name}")
+    public HashMap<String,Object> postThings(@PathVariable String name){
+        HashMap<String,Object> res=new HashMap<>();
+        res.put("name",name);
+        return  res;
     }
 }
