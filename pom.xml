@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.yzq</groupId>
     <artifactId>tutor</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>tutor</name>
     <description>Demo project for Spring Boot</description>
 
@@ -21,6 +21,7 @@
         <module>spring-tutor-redis</module>
         <module>spring-webflux</module>
         <module>spring-email</module>
+        <module>aop</module>
     </modules>
     <packaging>pom</packaging>
     <dependencies>
@@ -36,7 +37,11 @@
 <!--            <scope>runtime</scope>-->
 <!--            <optional>true</optional>-->
 <!--        </dependency>-->
-
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
