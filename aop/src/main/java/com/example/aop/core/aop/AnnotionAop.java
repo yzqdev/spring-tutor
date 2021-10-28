@@ -44,7 +44,10 @@ public class AnnotionAop {
             log.info("由于有authmethod注解");
             log.info(">>>认证成功");
             return obj;
-        }
+        }else {
+           log.info("由于authmethod值为false");
+           log.info("认证失败");
+       }
         System.out.println("after");
         return proceedingJoinPoint.proceed();
     }

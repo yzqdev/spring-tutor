@@ -19,4 +19,9 @@ public class AnnoController {
         System.out.println("hello controller");
         return  "hello";
     }
+    @AuthMethod(value = false)
+    @GetMapping("/no")
+    public  String noAuth(){
+        return  "false";
+    }
 }
