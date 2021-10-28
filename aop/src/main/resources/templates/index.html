@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+
+    <p> <button @click="getMethod">click get</button>{{ data  }}</p>
+    <p> <button @click="postMethod">click post</button>{{ postData  }}</p>
+</div>
+<script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+<script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
+<script>
+
+    const http = axios.create({
+        baseURL: 'http://localhost:9001',
+    });
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                data: '',
+                postData:''
+            };
+        },
+
+        methods: {
+            getMethod() {
+               http.get('/get?name=aaaa').then((res ) => {
+                 console.log(res)
+                   this.data=res.data
+               })
+            },  postMethod() {
+               http.post('/post/aaa').then((res ) => {
+                 console.log(res)
+                   this.postData=res.data
+               })
+            },
+        },
+
+        mounted() {
+        },
+    });
+</script>
+</body>
+</html>
