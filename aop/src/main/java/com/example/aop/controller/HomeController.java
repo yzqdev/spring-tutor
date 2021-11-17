@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -59,5 +60,9 @@ public class HomeController {
         HashMap<String,Object> res=new HashMap<>();
         res.put("name",name);
         return  res;
+    }  @PostMapping("/postJson")
+    public HashMap<String,Object> postJsonThings(@RequestBody HashMap map){
+
+        return  map;
     }
 }

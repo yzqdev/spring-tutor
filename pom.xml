@@ -19,6 +19,7 @@
     </properties>
     <modules>
         <module>spring-tutor-redis</module>
+        <module>spring-transfer</module>
         <module>spring-webflux</module>
         <module>spring-email</module>
         <module>aop</module>

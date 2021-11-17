@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class AnnoController {
     @AuthMethod
     @GetMapping("")
-    public String hello(){
+    public String hello() {
         System.out.println("hello controller");
-        return  "hello";
+        return "hello";
     }
+
     @AuthMethod(value = false)
     @GetMapping("/no")
-    public  String noAuth(){
-        return  "false";
+    public String noAuth() {
+        return "false";
     }
 }

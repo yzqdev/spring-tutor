@@ -5,12 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.util.Assert;
-
-import java.util.concurrent.TimeUnit;
-
+import  static  org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
-class SpringTutorRedisApplicationTests {
+class RedisApplicationTests {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -20,7 +17,7 @@ class SpringTutorRedisApplicationTests {
     @Test
     public void test() throws Exception {
         stringRedisTemplate.opsForValue().set("aaa", "111");
-        stringRedisTemplate.opsForValue().get("aaa");
+        assertEquals(stringRedisTemplate.opsForValue().get("aaa"),"111");
     }
 
 

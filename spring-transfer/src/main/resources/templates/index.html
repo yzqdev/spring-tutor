@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link
+            rel="stylesheet"
+            href="//cdn.jsdelivr.net/npm/element-plus/dist/index.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-plus"></script>
+</head>
+<body>
+<div id="app">
+    <el-button @click="deleteList">删除列表</el-button>
+    <div>{{user}}</div> <el-button @click="deleteList1">删除列表</el-button>
+    <div>{{user1}}</div>
+
+</div>
+
+<script>
+
+
+    const app = Vue.createApp({
+        data() {
+            return {
+                msg: 'hhhhh',
+                activeTab: 'first',
+                paramArr: ["aaa", "bbb", 'cccc'],
+                user:'',
+                user1:'',
+            }
+        }, methods: {
+            handleClick() {
+
+            },
+            deleteList1() {
+                fetch("/deleteUsers1", {
+                    method: "delete",
+                    body: JSON.stringify( this.paramArr),
+                    headers:{
+                        "Content-Type":"application/json"
+                    }
+                }).then((json) => {
+                    return json.json()
+                }).then((data ) => {
+                    this.user1=data
+                })
+            },
+            deleteList() {
+                fetch("/deleteUsers", {
+                    method: "delete",
+                    body: JSON.stringify({userIds: this.paramArr}),
+                    headers:{
+                        "Content-Type":"application/json"
+                    }
+                }).then((json) => {
+                  return json.json()
+                }).then((data ) => {
+                  this.user=data
+                })
+            }
+        }, created() {
+            this.activeTab = 'first'
+        }
+    })
+    app.use(ElementPlus);
+    app.mount("#app")
+</script>
+</body>
+</html>
