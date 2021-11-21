@@ -2,6 +2,7 @@ package com.example.springtransfer.controller;
 
 import com.example.springtransfer.entity.User;
 import com.example.springtransfer.entity.UserDelDto;
+import com.example.springtransfer.utils.RequestHelper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -21,16 +22,28 @@ public class UserController {
     }
 
     @DeleteMapping("/deleteUsers")
-    public HashMap<String,Object> deleteUsers(@RequestBody UserDelDto userDelDto) {
-        HashMap<String,Object> res=new HashMap<>();
-        res.put("obj",userDelDto);
+    public HashMap<String, Object> deleteUsers(@RequestBody UserDelDto userDelDto) {
+        HashMap<String, Object> res = new HashMap<>();
+        res.put("obj", userDelDto);
 
         return res;
-    }    @DeleteMapping("/deleteUsers1")
-    public HashMap<String,Object> deleteUsers1(@RequestBody String[] ids) {
-        HashMap<String,Object> res=new HashMap<>();
-        res.put("obj",ids);
+    }
 
+    @DeleteMapping("/deleteUsers1")
+    public HashMap<String, Object> deleteUsers1(@RequestBody String[] ids) {
+        HashMap<String, Object> res = new HashMap<>();
+        res.put("obj", ids);
+
+        return res;
+    }
+
+    @GetMapping("/users")
+    public HashMap<String, Object> getUsers() {
+        HashMap<String, Object> res = new HashMap<>();
+        String token = RequestHelper.getRequestHeader("token");
+        String auth = RequestHelper.getRequestHeader("Authorization");
+        res.put("token",token);
+        res.put("auth", auth);
         return res;
     }
 
