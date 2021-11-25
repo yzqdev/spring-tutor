@@ -3,22 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>websocket测试</title>
-    <style type="text/css">
-        h3,h4{
-            text-align:center;
+    <link
+            rel="stylesheet"
+            href="//cdn.jsdelivr.net/npm/element-plus/dist/index.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-plus"></script>
+    <style>
+        h3, h4 {
+            text-align: center;
         }
     </style>
 </head>
 <body>
+<div id="app">
 
-<h3>WebSocket测试，在<span style="color:red">控制台</span>查看测试信息输出！</h3>
-<h4>
-    <a href="/api/ws/sendOne?message=单发消息内容&id=none">单发消息</a>
+    <h3>WebSocket测试，在<span style="color:red">控制台</span>查看测试信息输出！</h3>
 
-     <a href="/api/ws/sendAll?message=群发消息内容">群发消息</a>
+  <el-card>
+      <el-input type="textarea" v-model="msg"></el-input>
+      <el-button @click="sendMsg" >群发消息</el-button>
+      <el-input v-model="uid"></el-input>
+      <el-button @click="sendOneMsg" >单发消息</el-button>
 
-</h4>
-<article id="msg"></article>
+
+      <article>{{receiveMsg.data}}sessionId: {{receiveMsg.sid}}</article>
+  </el-card>
+
+
+</div>
 
 <script type="text/javascript">
     var socket;
@@ -27,38 +40,77 @@
     } else {
         console.log("恭喜：您的浏览器支持WebSocket");
 
-        //实现化WebSocket对象
-        //指定要连接的服务器地址与端口建立连接
-        //注意ws、wss使用不同的端口。我使用自签名的证书测试，
-        //无法使用wss，浏览器打开WebSocket时报错
-        //ws对应http、wss对应https。
-        socket = new WebSocket("ws://localhost:9400/ws/asset");
-        //连接打开事件
-        socket.onopen = function() {
-            console.log("Socket 已打开");
-            socket.send("消息发送测试(From Client)");
+    }
+    const app = Vue.createApp({
+        data() {
+            return {
+                msg: 'hhhhh',
+                activeTab: 'first',
+                paramArr: ["aaa", "bbb", 'cccc'],
+                user: '',
+                user1: '', receiveMsg: '', socket: '',uid:''
+            }
+        }, methods: {
+            handleClick() {
 
-        };
-        //收到消息事件
-        socket.onmessage = function(msg) {
-            document.querySelector("#msg").innerHTML=msg.data
-            console.log(msg.data);
-        };
+            }, sendMsg() {
+
+                fetch(`/api/ws/sendAll?message=${this.msg}`, {method: "get"}).then((json) => {
+                    return json.json()
+                }).then((data) => {
+                    console.log("success")
+                })
+            },sendOneMsg() {
+
+                fetch(`/api/ws/sendOne?message=${this.msg}&id=${this.uid}`, {method: "get"}).then((json) => {
+                    return json.json()
+                }).then((data) => {
+                    console.log("success")
+                })
+            },
+
+        }, beforeDestroy() {
+            this.socket.close()
+        }, created() {
+            this.activeTab = 'first'
+        }, mounted() {
+            let that = this
+            //实现化WebSocket对象
+            //指定要连接的服务器地址与端口建立连接
+            //注意ws、wss使用不同的端口。我使用自签名的证书测试，
+            //无法使用wss，浏览器打开WebSocket时报错
+            //ws对应http、wss对应https。
+            var socket = new WebSocket("ws://localhost:9400/ws/asset");
+            //连接打开事件
+            socket.onopen = function (data) {
+                console.log(data)
+                console.log("Socket 已打开");
+                socket.send("消息发送测试(From Client)");
+
+            };
+            //收到消息事件
+            socket.onmessage = function (msg) {
+                that.receiveMsg = JSON.parse(msg.data)
+                console.log(msg );
+            };
 
             //连接关闭事件
-            socket.onclose = function() {
-            console.log("Socket已关闭");
-        };
-        //发生了错误事件
-        socket.onerror = function() {
-            alert("Socket发生了错误");
-        }
+            socket.onclose = function () {
+                console.log("Socket已关闭");
+            };
+            //发生了错误事件
+            socket.onerror = function () {
+                alert("Socket发生了错误");
+            }
+            this.socket = socket
+            //窗口关闭时，关闭连接
 
-        //窗口关闭时，关闭连接
-        window.unload=function() {
-            socket.close();
-        };
-    }
+        }
+    })
+    app.use(ElementPlus);
+    app.mount("#app")
+
+
 </script>
 
 </body>

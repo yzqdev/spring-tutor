@@ -1,12 +1,10 @@
 package com.example.springtransfer.controller;
 
 import com.example.springtransfer.config.WebSocketServer;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/ws")
@@ -19,13 +17,24 @@ public class WebSocketController {
      * @return
      */
     @RequestMapping(value="/sendAll", method= RequestMethod.GET)
-    public String sendAllMessage(@RequestParam(required=true) String message){
+    public HashMap sendAllMessage(@RequestParam("message") String message){
         try {
             WebSocketServer.broadCastInfo(message);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "ok";
+        HashMap<String,Object> res=new HashMap<>();
+        res.put("code", 200);
+        res.put("msg", "ok");
+        return res;
+    }
+    @GetMapping("/sid")
+    public HashMap getSid(){
+        HashMap<String,Object> res=new HashMap<>();
+        res.put("code", 200);
+        res.put("msg", "ok");
+        res.put("sid", "WebSocketServer.getSessionId()");
+        return res;
     }
     
     /**
@@ -35,12 +44,20 @@ public class WebSocketController {
      * @return
      */
     @RequestMapping(value="/sendOne", method=RequestMethod.GET)
-    public String sendOneMessage(@RequestParam() String message, @RequestParam() String id){
+    public HashMap sendOneMessage(@RequestParam() String message, @RequestParam() String id){
         try {
             WebSocketServer.sendMessageBySessionId(message,id);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "ok";
+        HashMap<String,Object> res=new HashMap<>();
+        res.put("code", 200);
+        res.put("msg", "ok");
+        return res;
+    }
+    @GetMapping("/msg")
+    public String sendMsg(){
+        return "hhhh";
+
     }
 }

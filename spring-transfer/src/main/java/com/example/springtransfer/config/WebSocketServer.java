@@ -7,10 +7,11 @@ import javax.annotation.PostConstruct;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@ServerEndpoint(value = "/ws/asset")
+@ServerEndpoint(value = "/ws/asset", encoders = {ServerEncoder.class})
 @Component
 @Slf4j
 public class WebSocketServer {
@@ -24,7 +25,7 @@ public class WebSocketServer {
     /**
      * concurrent包的线程安全Set，用来存放每个客户端对应的Session对象。
      */
-    private static CopyOnWriteArraySet<Session> sessionSet = new CopyOnWriteArraySet<Session>();
+    private static CopyOnWriteArraySet<Session> sessionSet = new CopyOnWriteArraySet<>();
 
 
     /**
@@ -37,6 +38,7 @@ public class WebSocketServer {
         int cnt = OnlineCount.incrementAndGet();
         log.info("有连接加入，当前连接数为：{}", cnt);
         sendMessage(session, "连接成功");
+        getSessionId(session);
     }
 
     /**
@@ -81,11 +83,20 @@ public class WebSocketServer {
      */
     public static void sendMessage(Session session, String message) {
         try {
-            session.getBasicRemote().sendText(String.format("%s (From Server，Session ID=%s)", message, session.getId()));
-        } catch (IOException e) {
+            session.getBasicRemote().sendObject(new HashMap<String,Object>(3){{
+                put("data", message);
+                put("text", String.format("message: %s (From Server，Session ID=%s)", message, session.getId()));
+                put("sid", session.getId());
+            }});
+            //session.getBasicRemote().sendText(String.format("message: %s (From Server，Session ID=%s)", message, session.getId()));
+        } catch (IOException | EncodeException e) {
             log.error("发送消息出错：{}", e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public static String getSessionId(Session session) {
+        return session.getId();
     }
 
     /**
