@@ -16,4 +16,8 @@ public class PageController {
     public String index() {
         return "index";
     }
+    @GetMapping("/websocket")
+    public String websocket(){
+        return  "websocket";
+    }
 }
