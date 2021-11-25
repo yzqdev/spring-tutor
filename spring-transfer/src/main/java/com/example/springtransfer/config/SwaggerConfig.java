@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.annotations.security.SecuritySchemes;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.License;
 
@@ -35,13 +36,13 @@ import java.util.List;
                 description = "Swagger3使用演示",
                 contact = @Contact(name = "TOM")
         ),
-        security = @SecurityRequirement(name = "token"),
+        security ={ @SecurityRequirement(name = "usersOrigin"), @SecurityRequirement(name = "Authorization")},
         externalDocs = @ExternalDocumentation(description = "参考文档",
                 url = "https://github.com/swagger-api/swagger-core/wiki/Swagger-2.X---Annotations"
         )
 )
-@SecurityScheme(type = SecuritySchemeType.APIKEY, name = "token", in = SecuritySchemeIn.HEADER)
 
+@SecuritySchemes({@SecurityScheme(type = SecuritySchemeType.APIKEY, name = "Authorization", in = SecuritySchemeIn.HEADER), @SecurityScheme(type = SecuritySchemeType.APIKEY, name = "usersOrigin", in = SecuritySchemeIn.HEADER)})
 public class SwaggerConfig {
     @Bean
     public GroupedOpenApi docker() {

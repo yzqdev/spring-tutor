@@ -2,6 +2,8 @@ package com.example.springtransfer.controller;
 
 import com.example.springtransfer.utils.RequestHelper;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -20,6 +22,12 @@ public class TokenController {
         String auth = RequestHelper.getRequestHeader("Authorization");
         res.put("token",token);
         res.put("auth", auth);
+        return res;
+    }
+    @PostMapping("/token/{id}")
+    public HashMap<String,String> token(@PathVariable("id") String id){
+        HashMap<String,String> res=new HashMap<>();
+        res.put("hhh", id);
         return res;
     }
 }
