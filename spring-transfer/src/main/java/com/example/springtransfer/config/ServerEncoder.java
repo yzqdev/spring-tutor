@@ -1,12 +1,10 @@
 package com.example.springtransfer.config;
- 
+
+import com.alibaba.fastjson.JSONObject;
+
 import javax.websocket.EncodeException;
 import javax.websocket.Encoder;
 import javax.websocket.EndpointConfig;
-
-import com.alibaba.fastjson.JSONObject;
-import com.example.springtransfer.entity.Messagepojo;
-
 import java.util.HashMap;
 
 
