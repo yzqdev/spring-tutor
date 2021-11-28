@@ -1,8 +1,11 @@
 package com.example.springtask.task.quartz.simple;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
@@ -13,27 +16,35 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import com.example.springtask.task.own.SchedulerTask;
 import com.example.springtask.task.quartz.simple.service.OrderService;
 
-public class SimpleJob  extends QuartzJobBean{
-	private static final Logger log = LoggerFactory.getLogger(SchedulerTask.class);
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-	@Autowired
-	private OrderService  orderService;//订单service
-	private String serviceCode;//业务code
-	
+import javax.annotation.Resource;
 
-	public String getServiceCode() {
-		return serviceCode;
-	}
-	public void setServiceCode(String serviceCode) {
-		this.serviceCode = serviceCode;
-	}
+/**
+ * 简单的工作
+ *
+ * @author yanni
+ * @date 2021/11/28
+ */
+@Slf4j
+public class SimpleJob extends QuartzJobBean {
+    @Resource
+    private OrderService orderService;
+    private String serviceCode;
 
-	@Override
-	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-		
-		System.out.println(serviceCode);
-		 log.info("quartz simple The time is now {}", dateFormat.format(new Date()));
-		orderService.delete();
-	}
+
+    public String getServiceCode() {
+        return serviceCode;
+    }
+
+    public void setServiceCode(String serviceCode) {
+        this.serviceCode = serviceCode;
+    }
+
+    @Override
+    protected void executeInternal(JobExecutionContext context) {
+
+        System.out.println(serviceCode);
+        log.info("quartz 简单时间   {}", LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+        orderService.delete();
+    }
 
 }

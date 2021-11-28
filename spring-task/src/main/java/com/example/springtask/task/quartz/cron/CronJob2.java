@@ -7,20 +7,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.springtask.task.quartz.cron.service.LiveReminderService;
 
-public class CronJob2 implements Job{
-	@Autowired
-	private LiveReminderService  liveReminderService;//直播课提醒
-	private String serviceCode;//业务code Live lesson reminder
+import javax.annotation.Resource;
 
-	public String getServiceCode() {
-		return serviceCode;
-	}
-	public void setServiceCode(String serviceCode) {
-		this.serviceCode = serviceCode;
-	}
-    @Override  
-    public void execute(JobExecutionContext context) throws JobExecutionException {
-    	System.out.println("CronJob2"+serviceCode);
-    	liveReminderService.sendmessage();
-    } 
+/**
+ * cron job2
+ *
+ * @author yanni
+ * @date 2021/11/28
+ */
+public class CronJob2 implements Job {
+    /**
+     * 生活提醒服务
+     */
+    @Resource
+    private LiveReminderService liveReminderService;
+    /**
+     * 服务代码
+     */
+    private String serviceCode;
+
+    public String getServiceCode() {
+        return serviceCode;
+    }
+
+    public void setServiceCode(String serviceCode) {
+        this.serviceCode = serviceCode;
+    }
+
+    @Override
+    public void execute(JobExecutionContext context) {
+        System.out.println("CronJob2" + serviceCode);
+        liveReminderService.sendmessage();
+    }
 }

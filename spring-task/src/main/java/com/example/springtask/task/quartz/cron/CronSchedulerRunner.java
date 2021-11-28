@@ -1,15 +1,24 @@
 package com.example.springtask.task.quartz.cron;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-@Component
+
+import javax.annotation.Resource;
+
+/**
+ * cron调度程序跑
+ *
+ * @author yanni
+ * @date 2021/11/28
+ */
+//@Component
 public class CronSchedulerRunner implements CommandLineRunner {
-	@Autowired
-	public CronSchedulerJobManger manger;
-	@Override
-	public void run(String... args) throws Exception {
-		manger.scheduleJobs();
-	}
+    @Resource
+    public CronSchedulerJobManger manger;
+
+    @Override
+    public void run(String... args) throws Exception {
+        manger.scheduleJobs();
+    }
 
 }
