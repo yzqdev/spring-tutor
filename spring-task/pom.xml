@@ -9,40 +9,20 @@
         <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>spring-transfer</artifactId>
+    <artifactId>spring-task</artifactId>
     <version>0.0.1</version>
+    <name>spring-task</name>
+    <description>spring-task</description>
     <packaging>jar</packaging>
-    <name>spring-transfer</name>
-    <description>spring-transfer</description>
     <properties>
         <java.version>17</java.version>
     </properties>
     <dependencies>
 
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
-        <!-- redis,使用jedis客户端排除lettuce -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <optional>true</optional>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.lettuce</groupId>
-                    <artifactId>lettuce-core</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <optional>true</optional>
+            <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
 
 
