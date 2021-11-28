@@ -1,6 +1,8 @@
 package com.example.springtransfer.controller;
 
 import com.example.springtransfer.config.Person;
+import com.example.springtransfer.entity.CatComponent;
+import com.example.springtransfer.entity.CatConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +27,13 @@ public class BeanController {
     @Resource
     ApplicationContext appContext;
 
-    @GetMapping("/beans")
+
+    @Resource
+    CatComponent catComponent;
+    @Resource
+    CatConfiguration catConfig;
+
+    @GetMapping("/personBean")
     public Person showBeans() {
         return person;
     }
@@ -43,12 +51,30 @@ public class BeanController {
         String[] beans = appContext.getBeanDefinitionNames();
         Arrays.sort(beans);
         for (String bean : beans) {
-            System.out.println(bean + " of Type :: " + appContext.getBean(bean).getClass());
+            //System.out.println(bean + " of Type :: " + appContext.getBean(bean).getClass());
         }
         res.put("beans", beans);
         return res;
 
 
     }
+
+    @GetMapping("/catComponent")
+    public HashMap<String, Object> getCat() {
+        HashMap<String, Object> res = new HashMap<>();
+        catComponent.init();
+        System.out.println(catComponent);
+        res.put("cat", catComponent.cat());
+        return res;
+    }
+
+    @GetMapping("/catConfig")
+    public HashMap<String, Object> getCatConfig() {
+        HashMap<String, Object> res = new HashMap<>();
+        System.out.println(catConfig  );
+        res.put("cat", catConfig .toString() );
+        return res;
+    }
+
 
 }
