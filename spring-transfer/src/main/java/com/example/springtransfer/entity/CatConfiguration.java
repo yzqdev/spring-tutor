@@ -41,4 +41,9 @@ public class CatConfiguration {
     public CatConfiguration getCat() {
         return CatConfiguration.builder().age("12").name("tomcat").sex("boy").build();
     }
+
+    @Bean
+    public CatConfiguration newCat(){
+        return  new CatConfiguration("aaa","bbb","ccc");
+    }
 }

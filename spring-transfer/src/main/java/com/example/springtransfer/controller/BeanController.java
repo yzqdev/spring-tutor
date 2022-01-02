@@ -32,6 +32,8 @@ public class BeanController {
     CatComponent catComponent;
     @Resource
     CatConfiguration catConfig;
+    @Resource(name = "catConfiguration")
+    CatConfiguration catConfiguration;
 
     @GetMapping("/personBean")
     public Person showBeans() {
@@ -71,9 +73,14 @@ public class BeanController {
     @GetMapping("/catConfig")
     public HashMap<String, Object> getCatConfig() {
         HashMap<String, Object> res = new HashMap<>();
-        System.out.println(catConfig  );
-        res.put("cat", catConfig .toString() );
+        System.out.println(catConfig);
+        res.put("cat", catConfig.toString());
         return res;
+    }
+   @GetMapping("/catConfiguration")
+    public CatConfiguration getCatConfiguation() {
+
+        return catConfiguration;
     }
 
 
