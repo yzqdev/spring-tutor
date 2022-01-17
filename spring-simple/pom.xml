@@ -25,10 +25,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-websocket</artifactId>
     </dependency>
-    <dependency>
-        <groupId>org.springdoc</groupId>
-        <artifactId>springdoc-openapi-ui</artifactId>
-    </dependency>
+
     <!-- redis,使用jedis客户端排除lettuce -->
     <dependency>
         <groupId>org.springframework.boot</groupId>

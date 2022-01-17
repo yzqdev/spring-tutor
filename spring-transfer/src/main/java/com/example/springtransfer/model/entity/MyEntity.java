@@ -1,6 +1,8 @@
-package com.example.springtransfer.entity;
+package com.example.springtransfer.model.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -15,14 +17,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class MyEntity {
     private String name;
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern= "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;
 
     public String getRole() {
         return "roles";
     }
 
-    @JSONField(serialize = false)
+    @JsonIgnore
     public String getRole1() {
         return "roles2";
     }

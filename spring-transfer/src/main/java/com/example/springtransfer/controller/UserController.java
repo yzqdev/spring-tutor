@@ -1,12 +1,11 @@
 package com.example.springtransfer.controller;
 
-import com.example.springtransfer.entity.User;
-import com.example.springtransfer.entity.UserDelDto;
+import com.example.springtransfer.model.entity.User;
+import com.example.springtransfer.model.entity.UserDelDto;
 import com.example.springtransfer.utils.RequestHelper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author yanni

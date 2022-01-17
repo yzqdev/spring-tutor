@@ -15,7 +15,7 @@ import java.util.Map;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension.class)
-class SpringTransferTests {
+class TransferTests {
     @Resource
     RedisUtils redisUtils;
 

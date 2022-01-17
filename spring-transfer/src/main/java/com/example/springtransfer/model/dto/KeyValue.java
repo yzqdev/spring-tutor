@@ -1,4 +1,4 @@
-package com.example.springtransfer.dto;
+package com.example.springtransfer.model.dto;
 
 import lombok.Data;
 

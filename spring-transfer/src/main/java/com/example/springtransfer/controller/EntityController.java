@@ -1,6 +1,6 @@
 package com.example.springtransfer.controller;
 
-import com.example.springtransfer.entity.MyEntity;
+import com.example.springtransfer.model.entity.MyEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

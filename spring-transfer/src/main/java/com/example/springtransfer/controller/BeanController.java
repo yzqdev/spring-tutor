@@ -1,8 +1,8 @@
 package com.example.springtransfer.controller;
 
 import com.example.springtransfer.config.Person;
-import com.example.springtransfer.entity.CatComponent;
-import com.example.springtransfer.entity.CatConfiguration;
+import com.example.springtransfer.model.entity.CatComponent;
+import com.example.springtransfer.model.entity.CatConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

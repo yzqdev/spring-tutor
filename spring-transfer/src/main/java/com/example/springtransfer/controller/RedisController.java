@@ -1,6 +1,5 @@
 package com.example.springtransfer.controller;
 
-import com.example.springtransfer.dto.KeyValue;
 import com.example.springtransfer.utils.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +24,7 @@ public class RedisController {
     @PostMapping("/putRedis")
     public HashMap putRedis(String key,String value) {
         HashMap<String, Object> res = new HashMap<>();
-        long result = redisUtils.sSet(key,value);
+       boolean result = redisUtils.set(key,value);
         res.put("res", result);
         return res;
     }

@@ -1,4 +1,4 @@
-package com.example.springtransfer.entity;
+package com.example.springtransfer.model.entity;
  
 import lombok.AllArgsConstructor;
 import lombok.Builder;

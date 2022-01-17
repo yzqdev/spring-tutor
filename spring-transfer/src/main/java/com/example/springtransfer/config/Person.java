@@ -1,10 +1,9 @@
 package com.example.springtransfer.config;
 
-import com.example.springtransfer.entity.Dog;
+import com.example.springtransfer.model.entity.Dog;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
