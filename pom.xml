@@ -24,6 +24,7 @@
         <module>spring-email</module>
         <module>spring-task</module>
         <module>aop</module>
+        <module>spring-simple</module>
     </modules>
     <packaging>pom</packaging>
     <dependencyManagement>
@@ -60,10 +61,12 @@
 
         </dependencies>
     </dependencyManagement>
-    <dependencies> <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -78,10 +81,12 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.3</version>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
+            <version>5.7.19</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

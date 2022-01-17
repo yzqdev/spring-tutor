@@ -23,7 +23,8 @@
   <el-card>
       <el-input type="textarea" v-model="msg"></el-input>
       <el-button @click="sendMsg" >群发消息</el-button>
-      <el-input v-model="uid"></el-input>
+      <el-input placeholder="Uid" v-model="uid"></el-input>
+      <el-input  v-model="msg"></el-input>
       <el-button @click="sendOneMsg" >单发消息</el-button>
 
 
