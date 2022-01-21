@@ -24,14 +24,14 @@ public class MyEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 3704448053616613744L;
     private String name;
-    @JsonFormat(   pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8" )
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime startTime;
 
     public String getRole() {
         return "roles";
     }
 
-   @JsonIgnore
+    @JsonIgnore
     public String getRole1() {
         return "roles2";
     }

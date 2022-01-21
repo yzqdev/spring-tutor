@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2022-01-18
  */
 public interface StudentMapper extends BaseMapper<Student> {
-    Integer saveStudent(Student student);
+
 }

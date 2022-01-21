@@ -1,6 +1,9 @@
 package com.example.springtransfer.model.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author yanni
@@ -8,6 +11,9 @@ import lombok.Data;
  * @modified By:
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     private String username;
     private String password;

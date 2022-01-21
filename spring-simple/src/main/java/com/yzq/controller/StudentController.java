@@ -6,6 +6,8 @@ import com.yzq.mapper.StudentMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 /**
  * <p>
  * 前端控制器
@@ -22,7 +24,9 @@ public class StudentController {
 
     @PostMapping("/save")
     public Integer saveStudent(@RequestBody Student student) {
-        return studentMapper.saveStudent(student);
+        student.setCreateTime(LocalDateTime.now());
+        student.setUpdateTime(LocalDateTime.of(2037, 1, 1, 0, 0, 0));
+        return studentMapper.insert(student);
     }
 }
 
