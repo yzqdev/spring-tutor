@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>spring-transfer</artifactId>
+    <artifactId>transfer</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
     <name>spring-transfer</name>
@@ -48,6 +48,11 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.79</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring-boot-web-starter</artifactId>
+            <version>1.8.0</version>
         </dependency>
 
         <!--mapStruct依赖-->

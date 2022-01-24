@@ -1,12 +1,11 @@
-package com.yzq.model;
+package com.yzq.transfer.model.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -14,13 +13,11 @@ import java.time.LocalDateTime;
  * @date time 2022/1/17 13:24
  * @modified By:
  */
-@Getter
+@Data
 @AllArgsConstructor
-public class MyEntity implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 3704448053616613744L;
+public class MyEntity {
     private String name;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(pattern= "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;
 
     public String getRole() {
