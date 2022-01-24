@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import com.example.springtask.util.ColorUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -42,8 +43,8 @@ public class SimpleJob extends QuartzJobBean {
     @Override
     protected void executeInternal(JobExecutionContext context) {
 
-        System.out.println(serviceCode);
-        log.info("quartz 简单时间   {}", LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+       ColorUtil.green(serviceCode);
+       ColorUtil.red("quartz 简单时间   "+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
         orderService.delete();
     }
 

@@ -1,14 +1,20 @@
 package com.example.springtask.task.jdk.scheduledExecutorService;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import com.example.springtask.util.ColorUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+/**
+ * 计划任务执行人
+ *
+ * @author yanni
+ * @date 2022/01/25
+ */
 @Slf4j
 public class ScheduledExecutorTask implements Runnable {
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern( "HH:mm:ss");
 
     @Override
     public void run() {
@@ -17,6 +23,6 @@ public class ScheduledExecutorTask implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        log.info("scheduledExecutorTask The time is now {}", dateFormat.format(new Date()));
+        ColorUtil.green("scheduledExecutorTask当前时间  "+dateFormat.format(LocalDateTime.now()));
     }
 }

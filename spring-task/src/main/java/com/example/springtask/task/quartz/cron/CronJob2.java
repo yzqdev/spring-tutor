@@ -1,5 +1,6 @@
 package com.example.springtask.task.quartz.cron;
 
+import com.example.springtask.util.ColorUtil;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -36,7 +37,7 @@ public class CronJob2 implements Job {
 
     @Override
     public void execute(JobExecutionContext context) {
-        System.out.println("CronJob2" + serviceCode);
+        ColorUtil.cyan("CronJob2" + serviceCode);
         liveReminderService.sendmessage();
     }
 }

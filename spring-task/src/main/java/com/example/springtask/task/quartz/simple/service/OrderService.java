@@ -1,5 +1,6 @@
 package com.example.springtask.task.quartz.simple.service;
 
+import com.example.springtask.util.ColorUtil;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,6 +17,6 @@ public class OrderService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("删除order成功....");
+       ColorUtil.red("删除order成功....");
     }
 }

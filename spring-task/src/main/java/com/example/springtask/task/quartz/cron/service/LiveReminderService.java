@@ -1,5 +1,6 @@
 package com.example.springtask.task.quartz.cron.service;
 
+import com.example.springtask.util.ColorUtil;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,6 +11,6 @@ public class LiveReminderService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("小明3点要去上课");
+       ColorUtil.blue("小明3点要去上课");
     }
 }

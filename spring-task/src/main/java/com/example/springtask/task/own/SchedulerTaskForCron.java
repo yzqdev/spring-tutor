@@ -1,16 +1,14 @@
 package com.example.springtask.task.own;
 
-import java.text.SimpleDateFormat;
+import com.example.springtask.util.ColorUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
-
-//@Component
+@Component
 @Slf4j
 public class SchedulerTaskForCron {
 
@@ -18,20 +16,20 @@ public class SchedulerTaskForCron {
      * 每天的14:00 执行一次
      */
     @Scheduled(cron = "0 0 14 * * ?")
-    private void cron() {
-        log.info("cron The time is now {}",  LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+    private void cron1() {
+        ColorUtil.cyan("cron1 每天14:00发生 "+  LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
     }
 
     /**
      * 每5秒执行一次
      */
-    @Scheduled(cron = "0/5 * * * * ?")
+    @Scheduled(cron = "0/3 * * * * ?")
     private void cron2() {
         try {
             Thread.sleep(6 * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        log.info("cron2 The time is now {}", LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+        ColorUtil.red("cron2 现在时间 "+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
     }
 }

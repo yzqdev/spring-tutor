@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import com.example.springtask.util.ColorUtil;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -40,7 +41,7 @@ public class CronJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) {
-        log.info("quartz cron 当前时间 {}", LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+        ColorUtil.redUnderline("quartz cron 当前时间 "+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
         liveReminderService.sendmessage();
     }
 }
