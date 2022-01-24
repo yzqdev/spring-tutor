@@ -1,5 +1,6 @@
-package com.example.springemail.service;
+package com.yzq.transfer.service.impl;
 
+import com.yzq.transfer.service.IMailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,29 +8,52 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
+import java.util.Map;
 
-@Component
-public class MailServiceImpl implements MailService {
+@Service
+public class MailServiceImpl implements IMailService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Resource
     private JavaMailSender mailSender;
-
+    @Resource
+    private TemplateEngine templateEngine;
     @Value("${spring.mail.username}")
     private String from;
 
+
     /**
-     * 发送文本邮件
-     * @param to
-     * @param subject
-     * @param content
+     * 获取html中的内容
+     */
+    private String build(Map<String, Object> mapMsg) {
+        Context context = new Context();
+        context.setVariables(mapMsg);
+        String result = templateEngine.process("emailTemplate", context);
+        System.out.println(result);
+        return result;
+    }
+
+    @Override
+    public void sendTemplateEmail(String to, String subject, Map<String, Object> content) {
+
+        sendHtmlMail(to, subject, build(content));
+    }
+
+    /**
+     * 发送简单邮件
+     *
+     * @param to      来
+     * @param subject 主题
+     * @param content 内容
      */
     @Override
     public void sendSimpleMail(String to, String subject, String content) {
@@ -50,6 +74,7 @@ public class MailServiceImpl implements MailService {
 
     /**
      * 发送html邮件
+     *
      * @param to
      * @param subject
      * @param content
@@ -76,13 +101,14 @@ public class MailServiceImpl implements MailService {
 
     /**
      * 发送带附件的邮件
+     *
      * @param to
      * @param subject
      * @param content
      * @param filePath
      */
     @Override
-    public void sendAttachmentsMail(String to, String subject, String content, String filePath){
+    public void sendAttachmentsMail(String to, String subject, String content, String filePath) {
         MimeMessage message = mailSender.createMimeMessage();
 
         try {
@@ -107,6 +133,7 @@ public class MailServiceImpl implements MailService {
 
     /**
      * 发送正文中有静态资源（图片）的邮件
+     *
      * @param to
      * @param subject
      * @param content
@@ -114,7 +141,7 @@ public class MailServiceImpl implements MailService {
      * @param rscId
      */
     @Override
-    public void sendInlineResourceMail(String to, String subject, String content, String rscPath, String rscId){
+    public void sendInlineResourceMail(String to, String subject, String content, String rscPath, String rscId) {
         MimeMessage message = mailSender.createMimeMessage();
 
         try {

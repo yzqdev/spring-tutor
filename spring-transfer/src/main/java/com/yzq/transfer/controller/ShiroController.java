@@ -31,4 +31,10 @@ public class ShiroController {
         return "please login!";
     }
 
+    @PostMapping("/logout")
+    public String logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return "logout success!";
+    }
 }

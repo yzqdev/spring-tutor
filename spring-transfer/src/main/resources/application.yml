@@ -1,4 +1,19 @@
 spring:
+  mail:
+    default-encoding: UTF-8
+    host: smtp.qq.com
+    password: yzzfhweeiidzdgcd
+    username: 1826814987@qq.com
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+          auth: true
+          timeout: 20000
+          host: smtp.qq.com
+          port: 587
+
   redis:
 
     # Redis数据库索引（默认为0）

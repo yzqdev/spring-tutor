@@ -1,4 +1,6 @@
-package com.example.springemail.service;
+package com.yzq.transfer.service;
+
+import java.util.Map;
 
 /**
  * @Author: Yangzhengqian
@@ -7,7 +9,9 @@ package com.example.springemail.service;
  * @Modified By:
  */
 
-public interface MailService {
+public interface IMailService {
+
+    void sendTemplateEmail(String to, String subject, Map<String, Object> content);
 
     void sendSimpleMail(String to, String subject, String content);
 
