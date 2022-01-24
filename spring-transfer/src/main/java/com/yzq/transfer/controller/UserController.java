@@ -1,8 +1,11 @@
 package com.yzq.transfer.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.yzq.transfer.model.entity.User;
 import com.yzq.transfer.model.entity.UserDelDto;
+import com.yzq.transfer.service.IUserService;
 import com.yzq.transfer.utils.RequestHelper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -13,8 +16,11 @@ import java.util.HashMap;
  * @modified By:
  */
 @RestController
-@RequestMapping
+@RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
+    private final IUserService userService;
+
     @GetMapping("user")
     public User getUser() {
         return null;
@@ -29,16 +35,18 @@ public class UserController {
     public User addUserBody(@RequestBody User user) {
         return user;
     }
+
     @PostMapping("/addUserParam")
     public User addUserParam(@RequestParam User user) {
         return user;
     }
 
     @PostMapping("/addUserstr")
-    public User addUserString(String username,String password) {
-        User user =  User.builder().username(username).password(password).build();
+    public User addUserString(String username, String password) {
+        User user = User.builder().username(username).password(password).build();
         return user;
     }
+
     @DeleteMapping("/deleteUsers")
     public HashMap<String, Object> deleteUsers(@RequestBody UserDelDto userDelDto) {
         HashMap<String, Object> res = new HashMap<>();
@@ -63,6 +71,11 @@ public class UserController {
         res.put("token", token);
         res.put("auth", auth);
         return res;
+    }
+
+    @GetMapping("/retrieve")
+    public User retrieve(@RequestParam("username") String username) {
+        return userService.getOne(new LambdaQueryWrapper<User>().eq(User::getUsername, username));
     }
 
 }
