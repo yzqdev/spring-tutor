@@ -15,7 +15,7 @@ public class ShiroController {
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(new UsernamePasswordToken(username, password));
-            return subject.getPrincipals();
+            return subject.getPrincipal();
         } catch (AuthenticationException e) {
             e.printStackTrace();
             System.out.println("登录失败!");
