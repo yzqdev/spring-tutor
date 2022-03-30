@@ -21,32 +21,85 @@ import java.util.HashMap;
 public class UserController {
     private final IUserService userService;
 
+    /**
+     * 获取用户
+     * api使用: http://localhost:9400/user/getUser
+     * @return {@link User}
+     */
     @GetMapping("user")
     public User getUser() {
         return null;
     }
 
+    /**
+     * 使用pathvariable
+     * api使用: http://localhost:9400/userByPath/abcdde
+     *
+     * @param id id
+     * @return {@link String}
+     */
+    @GetMapping("userByPath/{id}")
+    public String getUserByPath(@PathVariable("id") String id) {
+        return id;
+    }
+    /**
+     * 添加用户
+     * api使用: http://localhost:9400/user/addUserstr?username=aa&password=bb
+     * @return {@link User}
+     */
     @PostMapping("/addUser")
     public User addUser(User user) {
         return user;
     }
 
+    /**
+     * 添加用户
+     * api使用: http://localhost:9400/user/addUserbody
+     *<pre>
+     *     <code>
+     * {
+     *             "username": "aa",
+     *             "password": "bb"
+     *         }
+     *     </code>
+     *</pre>
+     * @param user 用户
+     * @return {@link User}
+     */
     @PostMapping("/addUserBody")
     public User addUserBody(@RequestBody User user) {
         return user;
     }
 
-    @PostMapping("/addUserParam")
-    public User addUserParam(@RequestParam User user) {
-        return user;
-    }
 
+    /**
+     * 添加用户
+     *api使用: http://localhost:9400/user/addUserstr?username=aa&password=bb
+     * @param username 用户名
+     * @param password 密码
+     * @return {@link User}
+     */
     @PostMapping("/addUserstr")
     public User addUserString(String username, String password) {
         User user = User.builder().username(username).password(password).build();
         return user;
     }
 
+    /**
+     * 删除多个用户
+     * api使用: http://localhost:9400/user/deleteUsers
+     * <pre>
+     *     <code>
+     *         {
+     *   "userIds": [
+     *     "string"
+     *   ]
+     * }
+     *     </code>
+     * </pre>
+     * @param userDelDto 用户del dto
+     * @return {@link HashMap}<{@link String}, {@link Object}>
+     */
     @DeleteMapping("/deleteUsers")
     public HashMap<String, Object> deleteUsers(@RequestBody UserDelDto userDelDto) {
         HashMap<String, Object> res = new HashMap<>();
@@ -55,6 +108,15 @@ public class UserController {
         return res;
     }
 
+    /**
+     * 删除users1
+     * api使用: http://localhost:9400/user/deleteUsers1
+     *[
+     *   "string"
+     * ]
+     * @param ids id
+     * @return {@link HashMap}<{@link String}, {@link Object}>
+     */
     @DeleteMapping("/deleteUsers1")
     public HashMap<String, Object> deleteUsers1(@RequestBody String[] ids) {
         HashMap<String, Object> res = new HashMap<>();
@@ -63,6 +125,11 @@ public class UserController {
         return res;
     }
 
+    /**
+     * 获取请求头信息
+     *
+     * @return {@link HashMap}<{@link String}, {@link Object}>
+     */
     @GetMapping("/users")
     public HashMap<String, Object> getUsers() {
         HashMap<String, Object> res = new HashMap<>();
@@ -73,6 +140,12 @@ public class UserController {
         return res;
     }
 
+    /**
+     * 检索
+     *api使用: http://localhost:9400/user/retrieve?username=aa
+     * @param username 用户名
+     * @return {@link User}
+     */
     @GetMapping("/retrieve")
     public User retrieve(@RequestParam("username") String username) {
         return userService.getOne(new LambdaQueryWrapper<User>().eq(User::getUsername, username));
