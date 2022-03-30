@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @author yanni
  * @date 2021/11/28
  */
-//@Configuration
+@Configuration
 public class SimpleJobConfig {
     @Bean
     public JobDetail simpleJobDetail() {
