@@ -1,7 +1,9 @@
 package com.yzq.service;
 
-import com.yzq.entity.Student;
+import com.yzq.entity.Post;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -11,6 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author y
  * @since 2022-05-17
  */
-public interface IStudentService extends IService<Student> {
-
+public interface IPostService extends IService<Post> {
+List<Post> getAllPage(int pageNum,int pageSize);
 }

@@ -26,24 +26,30 @@
         <artifactId>spring-boot-starter-websocket</artifactId>
     </dependency>
     <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-boot-starter</artifactId>
     </dependency>
     <dependency>
         <groupId>com.baomidou</groupId>
         <artifactId>mybatis-plus-generator</artifactId>
-        <version>3.5.1</version>
+        <version>3.5.2</version>
     </dependency>
     <dependency>
         <groupId>org.apache.velocity</groupId>
         <artifactId>velocity-engine-core</artifactId>
         <version>2.3</version>
     </dependency>
-    <dependency>
-        <groupId>com.baomidou</groupId>
-        <artifactId>mybatis-plus-boot-starter</artifactId>
-        <version>3.5.0</version>
-    </dependency>
+
     <!-- redis,使用jedis客户端排除lettuce -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -60,11 +66,6 @@
         <groupId>redis.clients</groupId>
         <artifactId>jedis</artifactId>
         <optional>true</optional>
-    </dependency>
-    <dependency>
-        <groupId>com.alibaba</groupId>
-        <artifactId>fastjson</artifactId>
-        <version>1.2.79</version>
     </dependency>
 
 </dependencies>

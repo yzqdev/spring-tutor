@@ -1,8 +1,8 @@
 package com.yzq.service.impl;
 
-import com.yzq.entity.User;
-import com.yzq.mapper.UserMapper;
-import com.yzq.service.IUserService;
+import com.yzq.entity.PostTag;
+import com.yzq.mapper.PostTagMapper;
+import com.yzq.service.IPostTagService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2022-05-17
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+public class PostTagServiceImpl extends ServiceImpl<PostTagMapper, PostTag> implements IPostTagService {
 
 }

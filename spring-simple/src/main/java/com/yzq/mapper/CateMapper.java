@@ -1,6 +1,6 @@
 package com.yzq.mapper;
 
-import com.yzq.entity.User;
+import com.yzq.entity.Cate;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author y
  * @since 2022-05-17
  */
-public interface UserMapper extends BaseMapper<User> {
+public interface CateMapper extends BaseMapper<Cate> {
 
 }

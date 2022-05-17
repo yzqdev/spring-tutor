@@ -30,7 +30,8 @@ public class ServerEncoder implements Encoder.Text<HashMap> {
 	@Override
 	public String encode(HashMap hashMap) throws EncodeException {
 		try {
-			return JSONObject.toJSONString(hashMap, false);
+			return  null;
+			//return JSONObject.toJSONString(hashMap, false);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

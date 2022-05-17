@@ -1,8 +1,7 @@
 package com.yzq.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +10,8 @@ import lombok.Setter;
  * 
  * </p>
  *
- * @author yz
- * @since 2022-01-18
+ * @author y
+ * @since 2022-05-17
  */
 @Getter
 @Setter
@@ -20,12 +19,34 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private String id;
 
     private String username;
 
     private String password;
+
+    private Integer age;
+
+    private String email;
+
+    private String num;
+
+    private String phone;
+
+    /**
+     * 错误次数
+     */
+    private String ecount;
+
+    /**
+     * 上次登录
+     */
+    private LocalDateTime ltime;
+
+    /**
+     * 创建时间
+     */
+    private LocalDateTime ctime;
 
 
 }

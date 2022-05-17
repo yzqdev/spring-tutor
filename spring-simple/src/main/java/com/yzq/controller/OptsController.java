@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2022-05-17
  */
 @RestController
-@RequestMapping("/student")
-public class StudentController {
+@RequestMapping("/opts")
+public class OptsController {
 
 }

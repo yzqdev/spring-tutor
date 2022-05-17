@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>传统开发模式中使用</title>
+  <link href="https://unpkg.com/md-editor-v3@1.11.14/lib/style.css" rel="stylesheet" />
+</head>
+<body>
+<div id="md-editor-v3">
+  <el-pagination background layout="prev, pager, next" :page-count="5" />
+  <div v-for="item in postList">
+    <md-editor-v3 preview-only v-model="item.markdownContent" />
+  </div>
+</div>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/axios"></script>
+<script src="https://unpkg.com/md-editor-v3@1.11.14/lib/md-editor-v3.umd.js"></script>
+<script>
+  const App = {
+    data() {
+      return {
+        text: 'Hello Editor!!',
+        postList:[]
+      };
+    },
+    mounted(){
+      axios.get('/post/all?pageNum=0&pageSize=5').then(res => {
+        this.postList=res.data
+      });
+    }
+  };
+  Vue.createApp(App).use(MdEditorV3).mount('#md-editor-v3');
+</script>
+</body>
+</html>

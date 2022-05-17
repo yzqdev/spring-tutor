@@ -1,6 +1,6 @@
 package com.yzq.service;
 
-import com.yzq.entity.Student;
+import com.yzq.entity.Tag;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author y
  * @since 2022-05-17
  */
-public interface IStudentService extends IService<Student> {
+public interface ITagService extends IService<Tag> {
 
 }

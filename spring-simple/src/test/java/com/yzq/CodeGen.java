@@ -25,7 +25,7 @@ static  String path="d://tmp//yzq";
                 .packageConfig(builder -> {
                     builder.parent("com.yzq") // 设置父包名
                             .moduleName("") // 设置父包模块名
-                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, path+"//mapper")); // 设置mapperXml生成路径
+                            .pathInfo(Collections.singletonMap(OutputFile.mapper, path+"//mapper")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> builder.addInclude("teacher"))
 

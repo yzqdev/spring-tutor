@@ -1,8 +1,6 @@
 package com.yzq.controller;
 
-
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -10,12 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
  *  前端控制器
  * </p>
  *
- * @author yz
- * @since 2022-01-18
+ * @author y
+ * @since 2022-05-17
  */
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
 }
-
