@@ -2,8 +2,10 @@ package com.yzq.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.*;
 
 /**
  * <p>
@@ -13,12 +15,14 @@ import lombok.Setter;
  * @author y
  * @since 2022-05-17
  */
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Student implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+@TableId(type = IdType.ASSIGN_ID)
     private Integer id;
 
     private String name;
