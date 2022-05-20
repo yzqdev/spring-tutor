@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <title>传统开发模式中使用</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios"></script>
+    <script src="https://unpkg.com/element-plus"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+
+    <script src="https://unpkg.com/md-editor-v3@1.11.14/lib/md-editor-v3.umd.js"></script>
+</head>
+<body>
+<div id="md-editor-v3">
+<input v-model="username" />
+<input v-model="password" />
+    <el-button @click="getPostList">登录</el-button>
+</div>
+
+<script>
+    const App = {
+        data() {
+            return {
+                text: 'Hello Editor!!',
+                postList:[],
+                username:'',
+                password:''
+            };
+        },
+        mounted(){
+
+        },methods:{
+            getPostList(){
+                axios.get('http://localhost:8550/login').then(res=>{
+                    alert(res)
+                })
+            }
+        },
+
+    };
+    Vue.createApp(App).use(MdEditorV3).use(ElementPlus).mount('#md-editor-v3');
+</script>
+</body>
+</html>

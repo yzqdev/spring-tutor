@@ -1,5 +1,7 @@
 package com.yzq.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,5 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+    @GetMapping("/hello")
+    String hello() {
+        return "hello world";
+    }
 
+    @GetMapping("/user")
+    String user() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
 }
