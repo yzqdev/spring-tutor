@@ -1,8 +1,8 @@
 package com.yzq.entity;
 
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
 
 /**
  * <p>
@@ -12,8 +12,10 @@ import lombok.Setter;
  * @author y
  * @since 2022-05-17
  */
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Cate implements Serializable {
 
     private static final long serialVersionUID = 1L;

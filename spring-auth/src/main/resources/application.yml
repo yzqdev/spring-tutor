@@ -1,0 +1,26 @@
+server:
+  port: 8560
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spring_simple?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 123456
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    lazy-loading-enabled: true
+    multiple-result-sets-enabled: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: assign_id
+      table-underline: true
+    enable-sql-runner: true
+  configuration-properties:
+    prefix:
+    blobType: BLOB
+    boolValue: TRUE
+  mapper-locations: classpath*:/mapper/**/*.xml

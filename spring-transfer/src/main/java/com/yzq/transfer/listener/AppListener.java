@@ -1,5 +1,6 @@
 package com.yzq.transfer.listener;
 
+import cn.hutool.core.lang.Console;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +21,8 @@ public class AppListener implements ApplicationListener<WebServerInitializedEven
         InetAddress address = null;
         try {
             address = InetAddress.getLocalHost();
-            System.out.println("http://" + address.getHostAddress() + ":" + port + "/swagger-ui.html");
-            System.out.println("http://" + address.getHostAddress() + ":" + port);
+            Console.log("http://" + address.getHostAddress() + ":" + port + "/swagger-ui.html");
+            Console.log("http://" + address.getHostAddress() + ":" + port);
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }

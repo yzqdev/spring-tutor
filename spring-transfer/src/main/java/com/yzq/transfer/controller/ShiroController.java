@@ -1,5 +1,7 @@
 package com.yzq.transfer.controller;
 
+import cn.hutool.core.lang.Console;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+
 public class ShiroController {
     @PostMapping("/doLogin")
     public Object doLogin(String username, String password) {
@@ -18,7 +21,7 @@ public class ShiroController {
             return subject.getPrincipal();
         } catch (AuthenticationException e) {
             e.printStackTrace();
-            System.out.println("登录失败!");
+            Console.log("登录失败!");
         }
         return "登录失败!";
     }
