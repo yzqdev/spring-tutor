@@ -1,5 +1,6 @@
 package com.example.aop.controller;
 
+import cn.hutool.core.lang.Console;
 import com.example.aop.annotation.AuthMethod;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class AnnoController {
     @AuthMethod
     @GetMapping("")
     public String hello() {
-        System.out.println("hello controller");
+        Console.log("hello controller");
         return "hello";
     }
 
