@@ -14,7 +14,7 @@
 <div id="app">
     <el-link href="swagger-ui.html" >swagger</el-link><br/>
     <el-button @click="deleteList">删除列表</el-button>
-    <div>{{user}}</div> <el-button @click="deleteList1">删除列表</el-button>
+    <div>{{sysUser}}</div> <el-button @click="deleteList1">删除列表</el-button>
     <div>{{user1}}</div>
 
 </div>
@@ -28,7 +28,7 @@
                 msg: 'hhhhh',
                 activeTab: 'first',
                 paramArr: ["aaa", "bbb", 'cccc'],
-                user:'',
+                sysUser:'',
                 user1:'',
             }
         }, methods: {
@@ -58,7 +58,7 @@
                 }).then((json) => {
                   return json.json()
                 }).then((data ) => {
-                  this.user=data
+                  this.sysUser=data
                 })
             }
         }, created() {

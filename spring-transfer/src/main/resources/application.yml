@@ -41,12 +41,12 @@ spring:
     # 连接超时时间（毫秒） 不能设为0 不然启动连接报超时异常
     timeout: 500
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
+    driver-class-name: org.postgresql.Driver
+    username: postgres
     password: 123456
-    url: jdbc:mysql://localhost:3306/spring_simple?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:postgresql://localhost:5432/spring_simple?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=Asia/Shanghai
 server:
-  port: 9400
+  port: 9700
 shiro:
   enabled: true
   sessionManager:

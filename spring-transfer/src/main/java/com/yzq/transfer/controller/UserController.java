@@ -1,7 +1,7 @@
 package com.yzq.transfer.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.yzq.transfer.model.entity.User;
+import com.yzq.transfer.model.entity.SysUser;
 import com.yzq.transfer.model.entity.UserDelDto;
 import com.yzq.transfer.service.IUserService;
 import com.yzq.transfer.utils.RequestHelper;
@@ -24,10 +24,10 @@ public class UserController {
     /**
      * 获取用户
      * api使用: http://localhost:9400/user/getUser
-     * @return {@link User}
+     * @return {@link SysUser}
      */
     @GetMapping("user")
-    public User getUser() {
+    public SysUser getUser() {
         return null;
     }
 
@@ -45,11 +45,11 @@ public class UserController {
     /**
      * 添加用户
      * api使用: http://localhost:9400/user/addUserstr?username=aa&password=bb
-     * @return {@link User}
+     * @return {@link SysUser}
      */
     @PostMapping("/addUser")
-    public User addUser(User user) {
-        return user;
+    public SysUser addUser(SysUser sysUser) {
+        return sysUser;
     }
 
     /**
@@ -63,12 +63,12 @@ public class UserController {
      *         }
      *     </code>
      *</pre>
-     * @param user 用户
-     * @return {@link User}
+     * @param sysUser 用户
+     * @return {@link SysUser}
      */
     @PostMapping("/addUserBody")
-    public User addUserBody(@RequestBody User user) {
-        return user;
+    public SysUser addUserBody(@RequestBody SysUser sysUser) {
+        return sysUser;
     }
 
 
@@ -77,12 +77,12 @@ public class UserController {
      *api使用: http://localhost:9400/user/addUserstr?username=aa&password=bb
      * @param username 用户名
      * @param password 密码
-     * @return {@link User}
+     * @return {@link SysUser}
      */
     @PostMapping("/addUserstr")
-    public User addUserString(String username, String password) {
-        User user = User.builder().username(username).password(password).build();
-        return user;
+    public SysUser addUserString(String username, String password) {
+        SysUser sysUser = SysUser.builder().username(username).password(password).build();
+        return sysUser;
     }
 
     /**
@@ -144,11 +144,11 @@ public class UserController {
      * 检索
      *api使用: http://localhost:9400/user/retrieve?username=aa
      * @param username 用户名
-     * @return {@link User}
+     * @return {@link SysUser}
      */
     @GetMapping("/retrieve")
-    public User retrieve(@RequestParam("username") String username) {
-        return userService.getOne(new LambdaQueryWrapper<User>().eq(User::getUsername, username));
+    public SysUser retrieve(@RequestParam("username") String username) {
+        return userService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, username));
     }
 
 }

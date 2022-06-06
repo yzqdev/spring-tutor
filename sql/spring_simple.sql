@@ -12,7 +12,7 @@
  Target Server Version : 140002
  File Encoding         : 65001
 
- Date: 17/05/2022 08:29:54
+ Date: 06/06/2022 10:08:34
 */
 
 
@@ -284,7 +284,7 @@ location部分用于匹配网页位置（比如，根目录“/”,“/images”
 下面的`nginx.conf`简单的实现nginx在前端做反向代理服务器的例子，处理js、png等静态文件，jsp等动态请求转发到其它服务器：
 
 ```
-sysUser  www www;
+user  www www;
 worker_processes  2;
 error_log  logs/error.log;
 #error_log  logs/error.log  notice;
@@ -522,7 +522,7 @@ nginx [-?hvVtq] [-s signal] [-c filename] [-p prefix] [-g directives]
 </blockquote>
 <h3><a id="toc-aa0" class="anchor" href="#toc-aa0"></a>通用</h3>
 <p>下面的<code>nginx.conf</code>简单的实现nginx在前端做反向代理服务器的例子，处理js、png等静态文件，jsp等动态请求转发到其它服务器：</p>
-<pre><code class="hljs lang-nginx"><span class="hljs-attribute">sysUser</span>  www www;
+<pre><code class="hljs lang-nginx"><span class="hljs-attribute">user</span>  www www;
 <span class="hljs-attribute">worker_processes</span>  <span class="hljs-number">2</span>;
 <span class="hljs-attribute">error_log</span>  logs/error.log;
 <span class="hljs-comment">#error_log  logs/error.log  notice;</span>
@@ -1750,17 +1750,17 @@ ssh-keygen -t rsa -C <span class="hljs-string">"zxysilent@foxmail.com"</span>
 </code></pre>
 ', 1, '2017-06-18 12:34:02', '2019-10-31 08:19:41', 1, 0, '{"template":"","push_sites":[]}');
 INSERT INTO "public"."post" VALUES ('18', '1', '1', 0, 3, 'git提交数据到github', 'git-to-github', '<h3 id="1-git">1.设置Git</h3>
-<pre><code class="hljs lang-routeros">git<span class="hljs-built_in"> config </span>--global sysUser.name <span class="hljs-string">"zxysilent"</span>
+<pre><code class="hljs lang-routeros">git<span class="hljs-built_in"> config </span>--global user.name <span class="hljs-string">"zxysilent"</span>
 
-git<span class="hljs-built_in"> config </span>--global sysUser.email <span class="hljs-string">"zxysilent@foxmail.com"</span>
+git<span class="hljs-built_in"> config </span>--global user.email <span class="hljs-string">"zxysilent@foxmail.com"</span>  
 </code></pre><h3 id="2-">2.初始化本地仓库</h3>
 <pre><code class="hljs lang-ebnf"><span class="hljs-attribute">git init</span>
 </code></pre><h3 id="3-">3.编写文件并添加到缓存区</h3>
 ', '### 1.设置Git
 ```
-git config --global sysUser.name "zxysilent"
+git config --global user.name "zxysilent"
 
-git config --global sysUser.email "zxysilent@foxmail.com"
+git config --global user.email "zxysilent@foxmail.com"  
 ```
 ### 2.初始化本地仓库
 ```
@@ -1793,9 +1793,9 @@ git push origin master
 <li><a href="#toc-708">6.提交到github(master分支)</a></li>
 </ul>
 </div><h3><a id="toc-156" class="anchor" href="#toc-156"></a>1.设置Git</h3>
-<pre><code class="hljs lang-stylus">git config --global sysUser<span class="hljs-selector-class">.name</span> <span class="hljs-string">"zxysilent"</span>
+<pre><code class="hljs lang-stylus">git config --global user<span class="hljs-selector-class">.name</span> <span class="hljs-string">"zxysilent"</span>
 
-git config --global sysUser<span class="hljs-selector-class">.email</span> <span class="hljs-string">"zxysilent@foxmail.com"</span>
+git config --global user<span class="hljs-selector-class">.email</span> <span class="hljs-string">"zxysilent@foxmail.com"</span>
 </code></pre><h3><a id="toc-a49" class="anchor" href="#toc-a49"></a>2.初始化本地仓库</h3>
 <pre><code class="hljs lang-ebnf"><span class="hljs-attribute">git init</span>
 </code></pre><h3><a id="toc-7bb" class="anchor" href="#toc-7bb"></a>3.编写文件并添加到缓存区</h3>
@@ -2899,9 +2899,9 @@ INSERT INTO "public"."post" VALUES ('26', '1', '1', 0, 3, 'git使用', 'git', '<
 <h2 id="-">配置信息</h2>
 <h3 id="-">必须配置</h3>
 <pre><code class="hljs lang-stylus"><span class="hljs-comment">// 配置用户名</span>
-git config --global sysUser<span class="hljs-selector-class">.name</span> <span class="hljs-string">"zxysilent"</span>
+git config --global user<span class="hljs-selector-class">.name</span> <span class="hljs-string">"zxysilent"</span>
 <span class="hljs-comment">//配置用户邮箱</span>
-git config --global sysUser<span class="hljs-selector-class">.email</span> <span class="hljs-string">"zxysilent@outlook.com"</span>
+git config --global user<span class="hljs-selector-class">.email</span> <span class="hljs-string">"zxysilent@outlook.com"</span>
 </code></pre>', '## 安装
 -  windows [git-for-windows](https://git-for-windows.github.io/)
 - ubuntu `sudo apt-get install git  `
@@ -2910,9 +2910,9 @@ git config --global sysUser<span class="hljs-selector-class">.email</span> <span
 ### 必须配置
 ~~~
 // 配置用户名
-git config --global sysUser.name "zxysilent"
+git config --global user.name "zxysilent"
 //配置用户邮箱
-git config --global sysUser.email "zxysilent@outlook.com"
+git config --global user.email "zxysilent@outlook.com"
 ~~~
 <!--more-->
 >  `--global` 表示你这台机器上所有的Git仓库都会使用这个配置   
@@ -3233,9 +3233,9 @@ Initialized empty Git repository in D:/App/Github/zxyslt/.git/
 <h2><a id="toc-09e" class="anchor" href="#toc-09e"></a>配置信息</h2>
 <h3><a id="toc-a68" class="anchor" href="#toc-a68"></a>必须配置</h3>
 <pre><code class="hljs lang-stylus"><span class="hljs-comment">// 配置用户名</span>
-git config --global sysUser<span class="hljs-selector-class">.name</span> <span class="hljs-string">"zxysilent"</span>
+git config --global user<span class="hljs-selector-class">.name</span> <span class="hljs-string">"zxysilent"</span>
 <span class="hljs-comment">//配置用户邮箱</span>
-git config --global sysUser<span class="hljs-selector-class">.email</span> <span class="hljs-string">"zxysilent@outlook.com"</span>
+git config --global user<span class="hljs-selector-class">.email</span> <span class="hljs-string">"zxysilent@outlook.com"</span>
 </code></pre><!--more-->
 <blockquote>
 <p> <code>--global</code> 表示你这台机器上所有的Git仓库都会使用这个配置   </p>
@@ -4953,7 +4953,7 @@ var mysql = require(''mysql'');
 //创建连接
 var connection = mysql.createConnection({
     host: ''localhost'', //主机名称
-    sysUser: ''root'', //用户名
+    user: ''root'', //用户名
     password: ''root'', //密码
     database: ''xj2014'' //数据库
 });
@@ -4976,7 +4976,7 @@ var mysql = require(''mysql'');
 //创建连接
 var connection = mysql.createConnection({
     host: ''localhost'', //主机名称
-    sysUser: ''root'', //用户名
+    user: ''root'', //用户名
     password: ''root'', //密码
     database: ''xj2014'' //数据库
 });
@@ -5000,7 +5000,7 @@ var mysql = require(''mysql'');
 //创建连接
 var connection = mysql.createConnection({
     host: ''localhost'', //主机名称
-    sysUser: ''root'', //用户名
+    user: ''root'', //用户名
     password: ''root'', //密码
     database: ''xj2014'' //数据库
 });
@@ -5027,7 +5027,7 @@ var mysql = require(''mysql'');
 //创建连接
 var connection = mysql.createConnection({
     host: ''localhost'', //主机名称
-    sysUser: ''root'', //用户名
+    user: ''root'', //用户名
     password: ''root'', //密码
     database: ''xj2014'' //数据库
 });
@@ -5071,7 +5071,7 @@ connection.end();
 <pre><code class="hljs lang-1c"><span class="hljs-comment">//创建连接</span>
 var connection = mysql.createConnection({
     host: ''localhost'', <span class="hljs-comment">//主机名称</span>
-    sysUser: ''root'', <span class="hljs-comment">//用户名</span>
+    user: ''root'', <span class="hljs-comment">//用户名</span>
     password: ''root'', <span class="hljs-comment">//密码</span>
     database: ''xj<span class="hljs-number">2014</span>'' <span class="hljs-comment">//数据库</span>
 });
@@ -5089,7 +5089,7 @@ connection.query(<span class="hljs-string">''SELECT * from userinfo limit 0,1''<
 <span class="hljs-comment">//创建连接</span>
 <span class="hljs-keyword">var</span> connection = mysql.createConnection({
     <span class="hljs-attr">host</span>: <span class="hljs-string">''localhost''</span>, <span class="hljs-comment">//主机名称</span>
-    sysUser: <span class="hljs-string">''root''</span>, <span class="hljs-comment">//用户名</span>
+    user: <span class="hljs-string">''root''</span>, <span class="hljs-comment">//用户名</span>
     password: <span class="hljs-string">''root''</span>, <span class="hljs-comment">//密码</span>
     database: <span class="hljs-string">''xj2014''</span> <span class="hljs-comment">//数据库</span>
 });
@@ -5110,7 +5110,7 @@ connection.end();
 <span class="hljs-comment">//创建连接</span>
 <span class="hljs-keyword">var</span> connection = mysql.createConnection({
     <span class="hljs-attr">host</span>: <span class="hljs-string">''localhost''</span>, <span class="hljs-comment">//主机名称</span>
-    sysUser: <span class="hljs-string">''root''</span>, <span class="hljs-comment">//用户名</span>
+    user: <span class="hljs-string">''root''</span>, <span class="hljs-comment">//用户名</span>
     password: <span class="hljs-string">''root''</span>, <span class="hljs-comment">//密码</span>
     database: <span class="hljs-string">''xj2014''</span> <span class="hljs-comment">//数据库</span>
 });
@@ -5134,7 +5134,7 @@ connection.end();
 <span class="hljs-comment">//创建连接</span>
 <span class="hljs-keyword">var</span> connection = mysql.createConnection({
     <span class="hljs-attr">host</span>: <span class="hljs-string">''localhost''</span>, <span class="hljs-comment">//主机名称</span>
-    sysUser: <span class="hljs-string">''root''</span>, <span class="hljs-comment">//用户名</span>
+    user: <span class="hljs-string">''root''</span>, <span class="hljs-comment">//用户名</span>
     password: <span class="hljs-string">''root''</span>, <span class="hljs-comment">//密码</span>
     database: <span class="hljs-string">''xj2014''</span> <span class="hljs-comment">//数据库</span>
 });
@@ -9422,9 +9422,9 @@ INSERT INTO "public"."post" VALUES ('46', '0', '1', 0, 0, '使用 oracle 数据�
 
 #### 启用scott用户
 
-- 给scott用户解锁【语法格式】（默认的scott用户是锁定的）：`alter sysUser username account unlock`
+- 给scott用户解锁【语法格式】（默认的scott用户是锁定的）：`alter user username account unlock`
 
- 例：`alter sysUser scott account unlock`
+ 例：`alter user scott account unlock`
 
 #### 赋予权限
 
@@ -9433,10 +9433,10 @@ INSERT INTO "public"."post" VALUES ('46', '0', '1', 0, 0, '使用 oracle 数据�
 - 一般权限（基本操作）    `grant rescore to SCOTT ;`
 
 #### 修改密码
-   - 修改用户口令 格式为：`alter sysUser uname identified by password`
+   - 修改用户口令 格式为：`alter user uname identified by password`
 
    - 以system 为例，密码修改为 123456. 可输入
-`alter sysUser system identified by 123456;`', '<div class="toc"><ul><li><a href="#toc__0">连接</a><ul><li><a href="#toc_SQL_PlusOracle_3">在SQL Plus中登录Oracle的用户的语法格式：</a></li><li><a href="#toc_scott_13">启用scott用户</a></li><li><a href="#toc__19">赋予权限</a></li><li><a href="#toc__25">修改密码</a></li></ul></li></ul></div><h3><a id="toc__0"></a>连接</h3>
+`alter user system identified by 123456;`', '<div class="toc"><ul><li><a href="#toc__0">连接</a><ul><li><a href="#toc_SQL_PlusOracle_3">在SQL Plus中登录Oracle的用户的语法格式：</a></li><li><a href="#toc_scott_13">启用scott用户</a></li><li><a href="#toc__19">赋予权限</a></li><li><a href="#toc__25">修改密码</a></li></ul></li></ul></div><h3><a id="toc__0"></a>连接</h3>
 <blockquote>
 <p><code>sqlplus /nolog</code> 进入<code>sqlplus</code>命令行</p>
 </blockquote>
@@ -9457,9 +9457,9 @@ INSERT INTO "public"."post" VALUES ('46', '0', '1', 0, 0, '使用 oracle 数据�
 </ol>
 <h4><a id="toc_scott_13"></a>启用scott用户</h4>
 <ul>
-<li>给scott用户解锁【语法格式】（默认的scott用户是锁定的）：<code>alter sysUser username account unlock</code></li>
+<li>给scott用户解锁【语法格式】（默认的scott用户是锁定的）：<code>alter user username account unlock</code></li>
 </ul>
-<p>例：<code>alter sysUser scott account unlock</code></p>
+<p>例：<code>alter user scott account unlock</code></p>
 <h4><a id="toc__19"></a>赋予权限</h4>
 <ul>
 <li>口令<code>GRANT power TO uname;</code></li>
@@ -9469,11 +9469,11 @@ INSERT INTO "public"."post" VALUES ('46', '0', '1', 0, 0, '使用 oracle 数据�
 <h4><a id="toc__25"></a>修改密码</h4>
 <ul>
 <li>
-<p>修改用户口令 格式为：<code>alter sysUser uname identified by password</code></p>
+<p>修改用户口令 格式为：<code>alter user uname identified by password</code></p>
 </li>
 <li>
 <p>以system 为例，密码修改为 123456. 可输入<br />
-<code>alter sysUser system identified by 123456;</code></p>
+<code>alter user system identified by 123456;</code></p>
 </li>
 </ul>
 ', 1, '2018-06-21 08:30:33', '2019-02-24 14:38:08', 1, 0, '{"template":"","featuredImage":"","push_sites":[]}');
@@ -15612,7 +15612,7 @@ tip`source D:/news.sql;`
 <!--more-->
 ## 命令行操作
 1. 连接命令
-`mysql -h host -P port  -u sysUser -p password`
+`mysql -h host -P port  -u user -p password`
 2. 步骤 `win + r `->`cmd`->`mysql -u root -p enter`-> `password`  
 ![](/static/upload/20180712/screenshot_1502449944199.png)
 ![](/static/upload/20180712/screenshot_1502449959964.png)
@@ -15855,7 +15855,7 @@ tip<code>source D:/news.sql;</code>
 <h2><a id="toc-15c" class="anchor" href="#toc-15c"></a>命令行操作</h2>
 <ol>
 <li>连接命令
-<code>mysql -h host -P port  -u sysUser -p password</code></li>
+<code>mysql -h host -P port  -u user -p password</code></li>
 <li>步骤 <code>win + r</code>-&gt;<code>cmd</code>-&gt;<code>mysql -u root -p enter</code>-&gt; <code>password</code><br><img src="/static/upload/20180712/screenshot_1502449944199.png" alt="">
 <img src="/static/upload/20180712/screenshot_1502449959964.png" alt=""></li>
 <li>显示所有数据库<br><code>show databases;</code><br><img src="/static/upload/20180712/screenshot_1502450071613.png" alt=""></li>
@@ -17474,7 +17474,7 @@ INSERT INTO "public"."post_tag" VALUES ('55', '8', '1');
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."student";
 CREATE TABLE "public"."student" (
-  "id" int4 NOT NULL,
+  "id" varchar(32) COLLATE "pg_catalog"."default" NOT NULL,
   "name" varchar(255) COLLATE "pg_catalog"."default",
   "tid" int4 NOT NULL,
   "create_time" timestamp(6),
@@ -17485,7 +17485,42 @@ CREATE TABLE "public"."student" (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO "public"."student" VALUES (1, 'string', 1, '2022-01-21 23:29:18', '2037-01-01 00:00:00');
+
+-- ----------------------------
+-- Table structure for sys_user
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."sys_user";
+CREATE TABLE "public"."sys_user" (
+  "id" varchar(32) COLLATE "pg_catalog"."default" NOT NULL,
+  "username" varchar(255) COLLATE "pg_catalog"."default",
+  "password" varchar(255) COLLATE "pg_catalog"."default",
+  "age" int4,
+  "email" varchar(255) COLLATE "pg_catalog"."default",
+  "num" varchar COLLATE "pg_catalog"."default",
+  "phone" varchar(255) COLLATE "pg_catalog"."default",
+  "ecount" varchar(255) COLLATE "pg_catalog"."default",
+  "ltime" timestamptz(6),
+  "ctime" timestamptz(6)
+)
+;
+COMMENT ON COLUMN "public"."sys_user"."ecount" IS '错误次数';
+COMMENT ON COLUMN "public"."sys_user"."ltime" IS '上次登录';
+COMMENT ON COLUMN "public"."sys_user"."ctime" IS '创建时间';
+
+-- ----------------------------
+-- Records of sys_user
+-- ----------------------------
+INSERT INTO "public"."sys_user" VALUES ('0', 'yzq', '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."sys_user" VALUES ('1', 'Abe Shino', 'lbVCgJWcjJ', 842, 'shabe2@yahoo.com', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."sys_user" VALUES ('2', 'Ku Wai San', 'i5JDJCjssE', 245, 'wsk1@outlook.com', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."sys_user" VALUES ('3', 'Shao Xiuying', 'UNxz1VdDFQ', 167, 'xiuyingsha00@mail.com', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."sys_user" VALUES ('4', 'Lo Ho Yin', '7UHKr1a695', 771, 'hol01@hotmail.com', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."sys_user" VALUES ('5', 'Chung Wing Suen', 'mqBJCmtnfp', 600, 'wingsuenchung9@icloud.com', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."sys_user" VALUES ('6', 'Imai Miu', 'wVbYjDUabl', 626, 'imaim@mail.com', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."sys_user" VALUES ('7', 'Wei Yuning', '9YbLmRr32l', 232, 'ywei@icloud.com', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."sys_user" VALUES ('8', 'Xia Lu', 'gHhGlPIxlo', 802, 'luxia@icloud.com', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."sys_user" VALUES ('9', 'Nakajima Riku', 'lea8Jt0iQy', 366, 'nakajimari@outlook.com', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."sys_user" VALUES ('10', 'Vincent Murray', 'vvNVhZmnhY', 121, 'murravinc@gmail.com', NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tag
@@ -17525,7 +17560,7 @@ INSERT INTO "public"."tag" VALUES ('9', 'beego', 'beego');
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."teacher";
 CREATE TABLE "public"."teacher" (
-  "id" int4 NOT NULL,
+  "id" varchar(32) COLLATE "pg_catalog"."default" NOT NULL,
   "name" varchar(255) COLLATE "pg_catalog"."default",
   "title" varchar(255) COLLATE "pg_catalog"."default",
   "create_time" timestamp(6),
@@ -17536,43 +17571,10 @@ CREATE TABLE "public"."teacher" (
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-INSERT INTO "public"."teacher" VALUES (1, 'string', 'string', '2022-01-21 23:29:40', '2022-01-21 23:29:40');
-
--- ----------------------------
--- Table structure for sysUser
--- ----------------------------
-DROP TABLE IF EXISTS "public"."sysUser";
-CREATE TABLE "public"."sysUser" (
-  "id" varchar(32) COLLATE "pg_catalog"."default" NOT NULL,
-  "username" varchar(255) COLLATE "pg_catalog"."default",
-  "password" varchar(255) COLLATE "pg_catalog"."default",
-  "age" int4,
-  "email" varchar(255) COLLATE "pg_catalog"."default",
-  "num" varchar COLLATE "pg_catalog"."default",
-  "phone" varchar(255) COLLATE "pg_catalog"."default",
-  "ecount" varchar(255) COLLATE "pg_catalog"."default",
-  "ltime" timestamptz(6),
-  "ctime" timestamptz(6)
-)
-;
-COMMENT ON COLUMN "public"."sysUser"."ecount" IS '错误次数';
-COMMENT ON COLUMN "public"."sysUser"."ltime" IS '上次登录';
-COMMENT ON COLUMN "public"."sysUser"."ctime" IS '创建时间';
-
--- ----------------------------
--- Records of sysUser
--- ----------------------------
-INSERT INTO "public"."sysUser" VALUES ('0', 'yzq', '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO "public"."sysUser" VALUES ('1', 'Abe Shino', 'lbVCgJWcjJ', 842, 'shabe2@yahoo.com', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO "public"."sysUser" VALUES ('2', 'Ku Wai San', 'i5JDJCjssE', 245, 'wsk1@outlook.com', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO "public"."sysUser" VALUES ('3', 'Shao Xiuying', 'UNxz1VdDFQ', 167, 'xiuyingsha00@mail.com', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO "public"."sysUser" VALUES ('4', 'Lo Ho Yin', '7UHKr1a695', 771, 'hol01@hotmail.com', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO "public"."sysUser" VALUES ('5', 'Chung Wing Suen', 'mqBJCmtnfp', 600, 'wingsuenchung9@icloud.com', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO "public"."sysUser" VALUES ('6', 'Imai Miu', 'wVbYjDUabl', 626, 'imaim@mail.com', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO "public"."sysUser" VALUES ('7', 'Wei Yuning', '9YbLmRr32l', 232, 'ywei@icloud.com', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO "public"."sysUser" VALUES ('8', 'Xia Lu', 'gHhGlPIxlo', 802, 'luxia@icloud.com', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO "public"."sysUser" VALUES ('9', 'Nakajima Riku', 'lea8Jt0iQy', 366, 'nakajimari@outlook.com', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO "public"."sysUser" VALUES ('10', 'Vincent Murray', 'vvNVhZmnhY', 121, 'murravinc@gmail.com', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "public"."teacher" VALUES ('1', 'string', 'string', '2022-01-21 23:29:40', '2022-01-21 23:29:40');
+INSERT INTO "public"."teacher" VALUES ('1527787758672703489', 'yzq', '123456', '2022-05-21 07:06:01.209331', '2022-05-21 07:06:01.209331');
+INSERT INTO "public"."teacher" VALUES ('1527788453417218049', 'yzq', '123456', '2022-05-21 07:08:46.89966', '2022-05-21 07:08:46.89966');
+INSERT INTO "public"."teacher" VALUES ('1527789319369027585', 'yzq', '123456', '2022-05-21 07:12:13.351456', '2022-05-21 07:12:13.351456');
 
 -- ----------------------------
 -- Primary Key structure for table student
@@ -17580,11 +17582,11 @@ INSERT INTO "public"."sysUser" VALUES ('10', 'Vincent Murray', 'vvNVhZmnhY', 121
 ALTER TABLE "public"."student" ADD CONSTRAINT "student_pkey" PRIMARY KEY ("id", "tid");
 
 -- ----------------------------
+-- Primary Key structure for table sys_user
+-- ----------------------------
+ALTER TABLE "public"."sys_user" ADD CONSTRAINT "user_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
 -- Primary Key structure for table teacher
 -- ----------------------------
 ALTER TABLE "public"."teacher" ADD CONSTRAINT "teacher_pkey" PRIMARY KEY ("id");
-
--- ----------------------------
--- Primary Key structure for table sysUser
--- ----------------------------
-ALTER TABLE "public"."sysUser" ADD CONSTRAINT "user_pkey" PRIMARY KEY ("id");

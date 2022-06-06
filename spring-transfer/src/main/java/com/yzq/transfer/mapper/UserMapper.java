@@ -1,7 +1,7 @@
 package com.yzq.transfer.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.yzq.transfer.model.entity.User;
+import com.yzq.transfer.model.entity.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -10,5 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @modified By:
  */
 @Mapper
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends BaseMapper<SysUser> {
 }

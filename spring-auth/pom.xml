@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>spring-auth</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>spring-auth</name>
     <description>spring-auth</description>
     <properties>
