@@ -1,6 +1,5 @@
 package spring.security.jwt.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -8,18 +7,20 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
-import spring.security.jwt.config.security.JwtConfigurer;
 import spring.security.jwt.constant.SecurityConstants;
-import spring.security.jwt.config.filter.JwtAuthorizationFilter;
+
+import javax.annotation.Resource;
+
+import static spring.security.jwt.config.security.MyCustomDsl.customDsl;
 
 /**
  * Web 安全配置
@@ -30,12 +31,12 @@ import spring.security.jwt.config.filter.JwtAuthorizationFilter;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Import(SecurityProblemSupport.class)
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration  {
 
-    @Autowired
+    @Resource
     private CorsFilter corsFilter;
 
-    @Autowired
+    @Resource
     private SecurityProblemSupport securityProblemSupport;
 
     /**
@@ -49,9 +50,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     /**
      * 此方法配置的资源路径不会进入 Spring Security 机制进行验证
      */
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring()
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+      return  web->  web.ignoring()
                 .antMatchers(HttpMethod.OPTIONS, "/**")
                 .antMatchers("/app/**/*.{js,html}")
                 .antMatchers("/v3/api-docs/**")
@@ -67,18 +68,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     /**
      * 定义安全策略，设置 HTTP 访问规则
      */
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
                 // 当用户无权访问资源时发送 401 响应
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 // 当用户访问资源因权限不足时发送 403 响应
-                .accessDeniedHandler(securityProblemSupport)
-             .and()
+                .accessDeniedHandler(securityProblemSupport);
+
                 // 禁用 CSRF
-                .csrf().disable()
+               http .csrf().disable()
                 .headers().frameOptions().disable()
              .and()
                 .logout().logoutUrl("/auth/logout").and()
@@ -87,7 +88,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 // 配置登录地址
                 .antMatchers(HttpMethod.POST, SecurityConstants.AUTH_LOGIN_URL).permitAll()
-                .antMatchers(HttpMethod.POST,"/api/users/register").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/user/reg").permitAll()
                 // 其他请求需验证
                 .anyRequest().authenticated()
              .and()
@@ -95,11 +96,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
              .and()
-               .apply(securityConfigurationAdapter());
-//        super.configure(http);
+               .apply(customDsl());
+        return http.build();
+
     }
 
-    private JwtConfigurer securityConfigurationAdapter() throws Exception{
-        return new JwtConfigurer(new JwtAuthorizationFilter(authenticationManager()));
-    }
+
 }

@@ -100,7 +100,7 @@ public class JwtUtils {
         DecodedJWT jwt = JWT.decode(token);
         Map<String, Claim> claims;
 
-        System.out.println(jwt.getClaims());
+
         claims = jwt.getClaims();
         // 获取用户角色字符串
         List<String> roles =  claims.get(SecurityConstants.TOKEN_ROLE_CLAIM).asList(String.class);

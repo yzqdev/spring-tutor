@@ -6,12 +6,12 @@ import spring.security.jwt.dto.UserRegisterDTO;
 import spring.security.jwt.entity.SysUser;
 
 /**
- * UserMapper
+ * UserConverter
  *
  * @author star
  */
 @Service
-public class UserMapper {
+public class UserConverter {
 
     public SysUser convertOfUserRegisterDTO(UserRegisterDTO dto) {
         SysUser sysUser = new SysUser();

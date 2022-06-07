@@ -1,19 +1,20 @@
 package spring.security.jwt.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import spring.security.jwt.constant.UserRoleConstants;
 import spring.security.jwt.dto.UserDTO;
 import spring.security.jwt.dto.UserRegisterDTO;
 import spring.security.jwt.entity.SysUser;
 import spring.security.jwt.entity.UserRole;
 import spring.security.jwt.config.exception.AlreadyExistsException;
 import spring.security.jwt.repository.UserRepository;
-import spring.security.jwt.service.mapper.UserMapper;
+import spring.security.jwt.repository.UserRoleRepository;
+import spring.security.jwt.service.mapper.UserConverter;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,32 +29,41 @@ import java.util.stream.Collectors;
 @Slf4j
 public class UserService {
 
-    @Autowired
-    private UserMapper userMapper;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserConverter userConverter;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private UserRoleService userRoleService;
+    private final UserRepository userRepository;
+
+
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserRoleRepository userRoleRepository;
+    public UserService(UserConverter userConverter, UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, UserRoleRepository userRoleRepository) {
+        this.userConverter = userConverter;
+        this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.userRoleRepository = userRoleRepository;
+    }
+
+
+
 
     @Transactional(rollbackFor = Exception.class)
     public SysUser register(UserRegisterDTO dto) {
         // 预检查用户名是否存在n
         Optional<SysUser> userOptional = this.getUserByName(dto.getUsername());
-        log.info(userOptional.get().toString());
+
         if (userOptional.isPresent()) {
-            throw new AlreadyExistsException("Save failed, the sysUser name already exist.");
+            throw new AlreadyExistsException("用户已存在.");
         }
-        SysUser sysUser = userMapper.convertOfUserRegisterDTO(dto);
+        SysUser sysUser = userConverter.convertOfUserRegisterDTO(dto);
+        log.info("sysuer={}",sysUser.toString());
         // 将登录密码进行加密
         String cryptPassword = bCryptPasswordEncoder.encode(dto.getPassword());
         sysUser.setPassword(cryptPassword);
         try {
             userRepository.save(sysUser);
+            userRoleRepository.save(UserRole.builder().id(null).username(sysUser.getUsername()).role(UserRoleConstants.ROLE_ADMIN).build());
             return  sysUser;
         } catch (DataIntegrityViolationException e) {
             // 如果预检查没有检查到重复，就利用数据库的完整性检查
@@ -85,7 +95,7 @@ public class UserService {
     }
 
     public List<String> listUserRoles(String userName) {
-        return userRoleService.listUserRoles(userName)
+        return userRoleRepository.findByUsername(userName)
                 .stream()
                 .map(UserRole::getRole)
                 .collect(Collectors.toList());
@@ -94,7 +104,7 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public void delete(String userName) {
         // 删除用户角色信息
-        userRoleService.deleteByUserName(userName);
+        userRoleRepository.deleteByUsername(userName);
         // 删除用户基本信息
         userRepository.deleteByUsername(userName);
     }
