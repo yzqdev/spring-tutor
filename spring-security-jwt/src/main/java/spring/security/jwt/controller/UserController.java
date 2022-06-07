@@ -1,6 +1,5 @@
 package spring.security.jwt.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,18 +12,18 @@ import spring.security.jwt.service.UserService;
 import javax.validation.Valid;
 
 /**
- * UserResource
+ * UserController
  *
  * @author star
  */
 @RestController
 @RequestMapping("/api/user")
-public class UserResource {
+public class UserController {
 
 
     private final UserService userService;
     private  final UserRoleService userRoleService;
-    public UserResource(UserService userService,UserRoleService userRoleService){
+    public UserController(UserService userService, UserRoleService userRoleService){
         this.userRoleService=userRoleService;
         this.userService=userService;
     }
