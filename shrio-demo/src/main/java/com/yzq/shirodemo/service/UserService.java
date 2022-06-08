@@ -1,5 +1,6 @@
 package com.yzq.shirodemo.service;
 
+import com.yzq.shirodemo.constant.SecurityConstants;
 import com.yzq.shirodemo.constant.UserRoleConstants;
 import com.yzq.shirodemo.dto.UserDTO;
 import com.yzq.shirodemo.dto.UserRegisterDTO;
@@ -48,40 +49,37 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public SysUser register(UserRegisterDTO dto) throws Exception {
         // 预检查用户名是否存在n
-        Optional<SysUser> userOptional = this.getUserByName(dto.getUsername());
+         SysUser  userOptional = this.getUserByName(dto.getUsername());
 
-        if (userOptional.isPresent()) {
-            throw new Exception("用户已存在.");
-        }
+
         SysUser sysUser = userConverter.convertOfUserRegisterDTO(dto);
         log.info("sysuer={}",sysUser.toString());
         // 将登录密码进行加密
-        String cryptPassword = BCrypt.hashpw(dto.getPassword(),BCrypt.gensalt());
+        String cryptPassword = BCrypt.hashpw(dto.getPassword(), SecurityConstants.SALT);
         sysUser.setPassword(cryptPassword);
         try {
             userRepository.save(sysUser);
             userRoleRepository.save(UserRole.builder().id(null).username(sysUser.getUsername()).role(UserRoleConstants.ROLE_ADMIN).build());
             return  sysUser;
-        } catch (DataIntegrityViolationException e) {
+        } catch ( Exception e) {
             // 如果预检查没有检查到重复，就利用数据库的完整性检查
-            throw new Exception("Save failed, the sysUser name already exist.");
+           e.printStackTrace();
+           return null;
 
         }
     }
 
-    public Optional<SysUser> getUserByName(String userName) {
-        return userRepository.findByUsername(userName);
+    public SysUser  getUserByName(String userName) {
+        return userRepository.findByUsername(userName).orElse(new SysUser());
 
     }
 
     public UserDTO getUserInfoByName(String userName) throws Exception {
-        Optional<SysUser> userOptional = this.getUserByName(userName);
-        if (!userOptional.isPresent()) {
-            throw new  Exception("SysUser not found with sysUser name: " + userName);
-        }
+        SysUser  userOptional = this.getUserByName(userName);
+
         // 获取用户角色
         List<String> roles = this.listUserRoles(userName);
-        SysUser sysUser = userOptional.get();
+        SysUser sysUser = userOptional ;
         // 设置用户信息
         UserDTO userDTO = new UserDTO();
         userDTO.setUsername(sysUser.getUsername());

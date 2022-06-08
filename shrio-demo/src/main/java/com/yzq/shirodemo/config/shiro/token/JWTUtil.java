@@ -41,25 +41,25 @@ public class JWTUtil {
         JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
         UserClaim jsonObject=new UserClaim();
         if(null==token){
-            jsonObject.setCheck(false);
+
             return jsonObject;
         }
         try {
 
             DecodedJWT verify = jwtVerifier.verify(token);
             Date expiresAt = verify.getExpiresAt();
-            jsonObject.setCheck(true);
-            jsonObject.setEmail(verify.getClaim("email").asString());
+
+            jsonObject.setUsername(verify.getClaim("email").asString());
             jsonObject.setPassword(verify.getClaim("password").asString());
             jsonObject.setUid(verify.getClaim("uid").asString());
         } catch (TokenExpiredException e) {
             e.printStackTrace();
             Console.log("token认证已过期，请重新登录获取");
-            jsonObject.setCheck(false);
+
         }catch (Exception e){
             e.printStackTrace();
             Console.log("token无效");
-            jsonObject.setCheck(false);
+
         }
         return jsonObject;
     }

@@ -36,6 +36,11 @@ public class ShiroConfig {
         definition.addPathDefinition("/swagger-ui/**", "anon");
         return definition;
     }
+
+    /**
+     * 防止接口上有RequiresPermission导致swaggerui失效
+     * @return
+     */
     @Bean
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator =

@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class UserClaim{
-    private Boolean check;
-    private String email;
+
+    private String username;
     private  String password;
     private  String uid;
 }

@@ -1,5 +1,7 @@
 package com.yzq.shirodemo.config.shiro;
 
+import com.yzq.shirodemo.constant.SecurityConstants;
+import com.yzq.shirodemo.constant.UserRoleConstants;
 import com.yzq.shirodemo.entity.SysUser;
 import com.yzq.shirodemo.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -32,7 +34,7 @@ public class UserRealm extends AuthorizingRealm {
         SysUser sysUser = (SysUser) subject.getPrincipal();
         ArrayList<String> roleList = new ArrayList();
 
-            roleList.add("sysUser");
+            roleList.add(UserRoleConstants.ROLE_ADMIN);
 
         info.addRoles(roleList);
         return info;
@@ -43,8 +45,8 @@ public class UserRealm extends AuthorizingRealm {
         UsernamePasswordToken userToken  ;
         userToken = (UsernamePasswordToken)tokenOBJ;
         SysUser sysUser = new SysUser();
-        sysUser.setEmail(userToken.getUsername());
-        SysUser u = userService.getUserByEmail(sysUser.getEmail());
+        sysUser.setUsername(userToken.getUsername());
+        SysUser u = userService.getUserByName(sysUser.getUsername());
         if(u==null){
             return null;
         }

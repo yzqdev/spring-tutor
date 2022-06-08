@@ -1,6 +1,7 @@
 package com.yzq.shirodemo.service;
 
 import com.yzq.shirodemo.config.shiro.token.JwtUser;
+import com.yzq.shirodemo.constant.SecurityConstants;
 import com.yzq.shirodemo.constant.UserRoleConstants;
 import com.yzq.shirodemo.dto.UserDTO;
 import com.yzq.shirodemo.dto.UserLoginDTO;
@@ -39,37 +40,34 @@ public class AuthService {
      * @param userLogin 用户登录信息
      */
     public JwtUser authLogin(UserLoginDTO userLogin) throws Exception {
-        String userName = userLogin.getUserName();
+        String username = userLogin.getUsername();
         String password = userLogin.getPassword();
 
         // 根据登录名获取用户信息
-        Optional<SysUser> userOptional = userService.getUserByName(userName);
-        if (!userOptional.isPresent()) {
-            throw new  Exception("SysUser not found with userName: " + userName);
-        }
-        SysUser sysUser = userOptional.get();
+        SysUser  userOptional = userService.getUserByName(username);
+
+        SysUser sysUser = userOptional ;
         // 验证登录密码是否正确。如果正确，则赋予用户相应权限并生成用户认证信息
         if (BCrypt.checkpw(password, sysUser.getPassword())) {
-            List<String> roles = userService.listUserRoles(userName);
+            List<String> roles = userService.listUserRoles(username);
             // 如果用户角色为空，则默认赋予 ROLE_USER 角色
             if (CollectionUtils.isEmpty(roles)) {
                 roles = Collections.singletonList(UserRoleConstants.ROLE_USER);
             }
             // 生成 token
-            String token = JwtUtils.generateToken(userName, roles, userLogin.getRememberMe());
+            String token = JwtUtils.generateToken(username, roles, userLogin.getRememberMe());
 
-            // 认证成功后，设置认证信息到 Spring Security 上下文中
+
             Subject subject = SecurityUtils.getSubject();
-            UsernamePasswordToken tokenOBJ = new UsernamePasswordToken(userName,password);
+            UsernamePasswordToken tokenOBJ = new UsernamePasswordToken(username,BCrypt.hashpw(password, SecurityConstants.SALT));
             tokenOBJ.setRememberMe(true);
-            //Authentication authentication = JwtUtils.getAuthentication(token);
-            //SecurityContextHolder.getContext().setAuthentication(authentication);
+
             subject.login(tokenOBJ);
             //一小时
             SecurityUtils.getSubject().getSession().setTimeout(3600000);
             // 用户信息
             UserDTO userDTO = new UserDTO();
-            userDTO.setUsername(userName);
+            userDTO.setUsername(username);
             userDTO.setEmail(sysUser.getEmail());
             userDTO.setRoles(roles);
 

@@ -1,6 +1,7 @@
 package com.yzq.shirodemo.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 /**
  * UserLoginDTO
@@ -8,9 +9,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @author star
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Data
 public class UserLoginDTO {
 
-    private String userName;
+    private String username;
 
     private String password;
 
@@ -19,27 +21,6 @@ public class UserLoginDTO {
      */
     private Boolean rememberMe = false;
 
-    public String getUserName() {
-        return userName;
-    }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getRememberMe() {
-        return rememberMe;
-    }
-
-    public void setRememberMe(Boolean rememberMe) {
-        this.rememberMe = rememberMe;
-    }
 }

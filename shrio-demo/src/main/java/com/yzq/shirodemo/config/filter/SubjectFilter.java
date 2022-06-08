@@ -40,58 +40,57 @@ public class SubjectFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-        UserService userService = SpringContextHolder.getBean(UserService .class);
+        UserService userService = SpringContextHolder.getBean(UserService.class);
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         String serviceName = httpServletRequest.getServletPath();
-Console.error(httpServletRequest.getServletPath());
+        Console.error(httpServletRequest.getServletPath());
         //验证前端域名
 
 
         String token = httpServletRequest.getHeader("Authorization");
-       UserClaim jsonObject = JWTUtil.checkToken(token);
-       Console.error(jsonObject.toString());
-        if (Boolean.FALSE.equals(jsonObject.getCheck())) {
-            if (!serviceName.contains("admin")) {
-                return true;
-            } else {
+        UserClaim jsonObject = JWTUtil.checkToken(token);
+        Console.error(jsonObject.toString());
+        //if (!serviceName.contains("admin")) {
+        //    return true;
+        //} else {
+        //    this.CODE = "403";
+        //    return false;
+        //}
+
+        Subject subject = SecurityUtils.getSubject();
+        SysUser sysUser = (SysUser) subject.getPrincipal();
+        if (sysUser == null) {
+            UsernamePasswordToken tokenOBJ = new UsernamePasswordToken(jsonObject.getUsername(), jsonObject.getPassword());
+            tokenOBJ.setRememberMe(true);
+            try {
+                subject.login(tokenOBJ);
+                //一小时
+                SecurityUtils.getSubject().getSession().setTimeout(3600000);
+            } catch (Exception e) {
+                log.info("拦截器，登录失败");
                 this.CODE = "403";
                 return false;
             }
         } else {
-            Subject subject = SecurityUtils.getSubject();
-            SysUser sysUser = (SysUser) subject.getPrincipal();
-            if (sysUser == null) {
-                UsernamePasswordToken tokenOBJ = new UsernamePasswordToken(jsonObject.getEmail(), jsonObject.getPassword());
-                tokenOBJ.setRememberMe(true);
+            if (null != sysUser) {
                 try {
-                    subject.login(tokenOBJ);
-                    //一小时
-                    SecurityUtils.getSubject().getSession().setTimeout(3600000);
-                } catch (Exception e) {
-log.info("拦截器，登录失败");
-                    this.CODE = "403";
-                    return false;
-                }
-            } else {
-                if (null != sysUser) {
-                    try {
-                        if (null != sysUser.getId()) {
-                            if (userService.getUserByEmail(sysUser.getEmail()) ==null) {
-                                subject.logout();
-                                this.CODE = "403";
-                                return false;
-                            }
+                    if (null != sysUser.getId()) {
+                        if (userService.getUserByEmail(sysUser.getEmail()) == null) {
+                            subject.logout();
+                            this.CODE = "403";
+                            return false;
                         }
-                    } catch (Exception e) {
-                        Console.log("拦截器判断用户isOK的时候报错了");
-                        e.printStackTrace();
                     }
+                } catch (Exception e) {
+                    Console.log("拦截器判断用户isOK的时候报错了");
+                    e.printStackTrace();
                 }
             }
         }
         return true;
     }
+
 
     /**
      * 在访问被拒绝

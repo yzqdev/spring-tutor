@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{username}")
-    @RequiresPermissions("roles[admin]")
+    @RequiresPermissions("ROLE_ADMIN")
     public ResponseEntity<Void> deleteByUserName(@PathVariable("username") String userName) {
         userService.delete(userName);
         return ResponseEntity.ok().build();

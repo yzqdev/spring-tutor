@@ -1,5 +1,7 @@
 package com.yzq.shirodemo.constant;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 /**
  * SecurityConstants
  *
@@ -24,7 +26,7 @@ public final class SecurityConstants {
      */
     public static final String JWT_SECRET_KEY = "p2s5v8y/B?E(H+MbQeThVmYq3t6w9z$C&F)J@NcRfUjXnZr4u7x!A%D*G-KaPdS";
 
-
+public static final String SALT= BCrypt.gensalt();
     /**
      * 一般是在请求头里加入 Authorization，并加上 Bearer 标注
      */
