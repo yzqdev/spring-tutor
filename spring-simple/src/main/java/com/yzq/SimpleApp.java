@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @modified By:
  */
 @SpringBootApplication
-@MapperScan("com.yzq.mapper")
+//@MapperScan("com.yzq.mapper")
 public class SimpleApp {
     public static void main(String[] args) {
        SpringApplication.run(SimpleApp.class,args);

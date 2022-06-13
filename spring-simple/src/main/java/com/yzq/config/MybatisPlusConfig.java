@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 //Spring boot方式
 @Configuration
-@MapperScan("com.yzq.*.mapper*")
+@MapperScan("com.yzq.mapper")
 public class MybatisPlusConfig {
 
     

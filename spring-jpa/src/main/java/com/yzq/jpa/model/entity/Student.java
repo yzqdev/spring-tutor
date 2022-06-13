@@ -1,22 +1,22 @@
-package com.yzq.entity;
+package com.yzq.jpa.model.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
-
 /**
- * <p>
- * 
- * </p>
- *
- * @author y
- * @since 2022-05-17
+ * @author yanni
+ * @date time 2022/6/13 21:56
+ * @modified By:
  */
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +24,8 @@ import lombok.*;
 public class Student implements Serializable {
 
     private static final long serialVersionUID = 1L;
-@TableId(type = IdType.ASSIGN_ID)
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String name;
